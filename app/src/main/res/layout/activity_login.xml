@@ -105,6 +105,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/ColorBlue"
+        android:onClick="onLoginPressed"
         android:text="Sign-in"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

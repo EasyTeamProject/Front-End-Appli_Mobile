@@ -17,4 +17,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent i =new Intent(this,SuscribeActivity.class);
         startActivity(i);
     }
+
+    public void onLoginPressed(View view){
+        Intent i =new Intent(this,HomeActivity.class);
+        startActivity(i);
+    }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Front_end_mobile</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_notif">Notification</string>
+    <string name="nav_profil">Profil</string>
+    <string name="nav_add_event">AddEvent</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

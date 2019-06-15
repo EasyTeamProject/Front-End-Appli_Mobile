@@ -32,7 +32,7 @@ public class SuscribeActivity extends AppCompatActivity {
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         editTextConfirmPassword=(EditText)findViewById(R.id.editTextConfirmPassword);
     }
-    public void onBackToLoginPressed(View view){
+    public void onBackToLoginPressed(){
         Intent i =new Intent(this,LoginActivity.class);
         startActivity(i);
     }
@@ -51,7 +51,7 @@ public class SuscribeActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             Log.i("API", "onResponse: " + response.toString());
                             Toast.makeText(getApplicationContext(), "Account created successfuly", Toast.LENGTH_SHORT).show();
-                            onBackToLoginPressed(view);
+                            onBackToLoginPressed();
                         }
                     },
                     new Response.ErrorListener() {

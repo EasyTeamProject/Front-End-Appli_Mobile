@@ -49,7 +49,6 @@ public class SuscribeActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.i("API", "onResponse: " + response.toString());
                             Toast.makeText(getApplicationContext(), "Account created successfuly", Toast.LENGTH_SHORT).show();
                             onBackToLoginPressed();
                         }
@@ -57,7 +56,7 @@ public class SuscribeActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i("API", "onResponse: " + error.toString());
+                            Toast.makeText(getApplicationContext(), "Error to create an account", Toast.LENGTH_SHORT).show();
                         }
                     }
             );

@@ -62,6 +62,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View view){
                 PreferenceUtils.savePassword(null, context);
                 PreferenceUtils.saveEmail(null, context);
+                PreferenceUtils.saveToken(null, context);
                 Intent intent = new Intent(context, LoginActivity.class);
                 startActivity(intent);
             }

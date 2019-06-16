@@ -34,4 +34,17 @@ public class PreferenceUtils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString("password", null);
     }
+
+    public static boolean saveToken(String token, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString("token", token);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getToken(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString("token", null);
+    }
 }

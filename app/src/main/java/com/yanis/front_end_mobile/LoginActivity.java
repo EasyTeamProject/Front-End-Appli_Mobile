@@ -15,7 +15,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -66,8 +69,15 @@ public class LoginActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Toast.makeText(getApplicationContext(), "Login successfuly", Toast.LENGTH_SHORT).show();
-                            onLogin();
+                            try {
+                                if(response.getString("error")!=null){
+                                    Toast.makeText(getApplicationContext(), "Error to login : Email or password are incorrect", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(getApplicationContext(), "Login successfuly", Toast.LENGTH_SHORT).show();
+                                onLogin();
+                                e.printStackTrace();
+                            }
                         }
                     },
                     new Response.ErrorListener() {

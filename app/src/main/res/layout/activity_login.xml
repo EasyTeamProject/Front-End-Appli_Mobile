@@ -77,12 +77,12 @@
             android:id="@+id/editTextPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:ems="10"
             android:inputType="textPassword"
-            android:text="Name"
+            android:text="password"
             android:textAlignment="center"
-            android:textColor="@color/ColorDarkGrey"
-            android:background="@android:color/transparent"/>
+            android:textColor="@color/ColorDarkGrey" />
     </android.support.v7.widget.CardView>
 
     <TextView

@@ -156,7 +156,7 @@
             android:contentDescription="editTextConfirmPassword"
             android:ems="10"
             android:inputType="textPersonName|textPassword"
-            android:text="Confirm password"
+            android:text="password"
             android:textAlignment="center"
             android:textColor="#A4FFFFFF" />
     </android.support.v7.widget.CardView>

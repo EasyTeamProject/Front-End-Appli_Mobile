@@ -51,13 +51,13 @@
             android:id="@+id/editTextEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:contentDescription="E-mail"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:text="E-mail"
             android:textAlignment="center"
-            android:textColor="@color/ColorDarkGrey"
-            android:background="@android:color/transparent"/>
+            android:textColor="#A4FFFFFF" />
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -82,7 +82,7 @@
             android:inputType="textPassword"
             android:text="password"
             android:textAlignment="center"
-            android:textColor="@color/ColorDarkGrey" />
+            android:textColor="#A4FFFFFF" />
     </android.support.v7.widget.CardView>
 
     <TextView

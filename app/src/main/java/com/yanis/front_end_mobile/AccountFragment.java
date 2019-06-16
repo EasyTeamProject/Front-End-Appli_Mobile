@@ -56,6 +56,17 @@ public class AccountFragment extends Fragment {
             }
 
         });
-}
+
+        Button btLogOut=(Button)context.findViewById(R.id.btnLogOut);
+        btLogOut.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                PreferenceUtils.savePassword(null, context);
+                PreferenceUtils.saveEmail(null, context);
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivity(intent);
+            }
+
+        });
+    }
 
 }

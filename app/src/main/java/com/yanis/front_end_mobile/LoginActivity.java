@@ -29,29 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
-       /* StringBuilder result = new StringBuilder();
-        HttpURLConnection urlConnection = null;
-        try {
 
-            String apiUrl = "https://api.myjson.com/bins/194g99"; // concatenate uri with base url eg: localhost:8080/ + uri
-            URL requestUrl = new URL(apiUrl);
-            urlConnection = (HttpURLConnection) requestUrl.openConnection();
-            urlConnection.connect(); // no connection is mad
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                result.append(line);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            urlConnection.disconnect();
-        }
-        Log.i("API", "onCreate: "+result.toString());
-    */
 
     /*   RequestQueue requestQueue = Volley.newRequestQueue(this);
 

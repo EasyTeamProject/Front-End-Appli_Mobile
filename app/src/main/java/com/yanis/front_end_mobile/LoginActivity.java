@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,7 +15,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -24,58 +29,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
+    public EditText editTextEmailLogin;
+    public EditText editTextPasswordLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
-       /* StringBuilder result = new StringBuilder();
-        HttpURLConnection urlConnection = null;
-        try {
-
-            String apiUrl = "https://api.myjson.com/bins/194g99"; // concatenate uri with base url eg: localhost:8080/ + uri
-            URL requestUrl = new URL(apiUrl);
-            urlConnection = (HttpURLConnection) requestUrl.openConnection();
-            urlConnection.connect(); // no connection is mad
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                result.append(line);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            urlConnection.disconnect();
-        }
-        Log.i("API", "onCreate: "+result.toString());
-    */
-
-    /*   RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        String URL = "https://api.myjson.com/bins/194g99";
-
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                URL,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i("API", "onResponse: " + response.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("API", "onResponse: " + error.toString());
-                    }
-                }
-        );
-
-        requestQueue.add(objectRequest);*/
+        editTextEmailLogin=(EditText)findViewById(R.id.editTextEmailLogin);
+        editTextPasswordLogin=(EditText)findViewById(R.id.editTextPasswordLogin);
+        initViews();
     }
 
     public void onSuscribePressed(View view){
@@ -83,8 +46,62 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void onLoginPressed(View view){
-        Intent i =new Intent(this,HomeActivity.class);
-        startActivity(i);
+
+    public void onLogin(){
+
+        PreferenceUtils.saveEmail(editTextEmailLogin.getText().toString().trim(), this);
+        PreferenceUtils.savePassword(editTextPasswordLogin.getText().toString().trim(), this);
+
+        Intent accountsIntent = new Intent(this, HomeActivity.class);
+        emptyInputEditText();
+        startActivity(accountsIntent);
+        finish();
+    }
+
+    public void login(final View view){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        String URL = "http://192.168.1.12:3000/sessions?email="+editTextEmailLogin.getText().toString().trim()+"&password="+editTextPasswordLogin.getText().toString().trim();
+            JsonObjectRequest objectRequest = new JsonObjectRequest(
+                    Request.Method.POST,
+                    URL,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if(response.getString("error")!=null){
+                                    Toast.makeText(getApplicationContext(), "Error to login : Email or password are incorrect", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(getApplicationContext(), "Login successfuly", Toast.LENGTH_SHORT).show();
+                                onLogin();
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Error to login", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            requestQueue.add(objectRequest);
+
+    }
+
+    private void emptyInputEditText(){
+        editTextEmailLogin.setText(null);
+        editTextPasswordLogin.setText(null);
+    }
+
+    private void initViews(){
+        PreferenceUtils utils = new PreferenceUtils();
+
+        if (utils.getEmail(this) != null ){
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         editTextEmailLogin=(EditText)findViewById(R.id.editTextEmailLogin);
         editTextPasswordLogin=(EditText)findViewById(R.id.editTextPasswordLogin);
+        initViews();
     }
 
     public void onSuscribePressed(View view){
@@ -83,5 +84,14 @@ public class LoginActivity extends AppCompatActivity {
     private void emptyInputEditText(){
         editTextEmailLogin.setText(null);
         editTextPasswordLogin.setText(null);
+    }
+
+    private void initViews(){
+        PreferenceUtils utils = new PreferenceUtils();
+
+        if (utils.getEmail(this) != null ){
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
     }
 }

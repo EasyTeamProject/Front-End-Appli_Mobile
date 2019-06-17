@@ -65,6 +65,7 @@ public class AccountFragment extends Fragment {
                 PreferenceUtils.saveToken(null, context);
                 Intent intent = new Intent(context, LoginActivity.class);
                 startActivity(intent);
+                context.finish();
             }
 
         });

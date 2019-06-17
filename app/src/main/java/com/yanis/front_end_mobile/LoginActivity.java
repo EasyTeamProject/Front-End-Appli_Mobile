@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         if (utils.getEmail(this) != null ){
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

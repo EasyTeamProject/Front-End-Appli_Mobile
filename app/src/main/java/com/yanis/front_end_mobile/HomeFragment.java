@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,19 +52,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        List<String> list=new ArrayList<>();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        list.add("four");
-        list.add("five");
-
         PreferenceUtils utils = new PreferenceUtils();
         context=getActivity();
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView recyclerView=v.findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new RecyclerViewAdapter(list));
+        getAllEvent(recyclerView);
         return v;
     }
 
@@ -115,25 +109,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-    public void onStart(){
-        super.onStart();
-        getAllEvent();
-    }
-
-
-
-    private void getAllEvent() {
+    private void getAllEvent(final RecyclerView recyclerView) {
 
         final String URL = "http://192.168.1.12:3000/events";
         final String Token = utils.getToken(context);
@@ -145,7 +121,17 @@ public class HomeFragment extends Fragment {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.i("info", "onResponse: OOOK ");
+                        try {
+                            List<String> list=new ArrayList<>();
+                            for (int i=0; i < response.length(); i++){
+                                JSONObject jsonObject=response.getJSONObject(i);
+                                list.add(jsonObject.getString("name"));
+                            }
+                            recyclerView.setAdapter(new RecyclerViewAdapter(list));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.i("info", "onResponse: OOOK dans l'exception");
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -164,11 +150,7 @@ public class HomeFragment extends Fragment {
                 return headers;
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonObjectRequest);
-
     }
-
-
 }

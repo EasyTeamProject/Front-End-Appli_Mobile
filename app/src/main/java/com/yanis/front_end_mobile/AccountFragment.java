@@ -33,6 +33,19 @@ public class AccountFragment extends Fragment {
 
     public void onStart(){
         super.onStart();
+
+        Button btnFriends=(Button)context.findViewById(R.id.btnFriends);
+        btnFriends.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                //create an Intent object
+                Intent intent=new Intent(context, FriendsActivity.class);
+                //add data to the Intent object
+                //start the second activity
+                startActivity(intent);
+            }
+
+        });
+
         Button btAboutUs=(Button)context.findViewById(R.id.btnAboutUs);
         btAboutUs.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){

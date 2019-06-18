@@ -3,7 +3,11 @@ package com.yanis.front_end_mobile;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +28,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 
 /**
@@ -40,18 +47,84 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        List<String> list=new ArrayList<>();
+        list.add("one");
+        list.add("two");
+        list.add("three");
+        list.add("four");
+        list.add("five");
+
         PreferenceUtils utils = new PreferenceUtils();
         context=getActivity();
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-     /*   textView= (TextView)v.findViewById(R.id.textViewHomeFragment);
-        textView.setText(utils.getEmail(context));*/
+        RecyclerView recyclerView=v.findViewById(R.id.recycle_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new RecyclerViewAdapter(list));
         return v;
     }
+
+
+    private class RecyclerViewHolder extends RecyclerView.ViewHolder{
+
+        private CardView mCardView;
+        private TextView mTextView;
+
+        public RecyclerViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public RecyclerViewHolder(LayoutInflater inflater, ViewGroup container){
+            super(inflater.inflate(R.layout.card_view,container,false));
+
+            mCardView = itemView.findViewById(R.id.card_container);
+            mTextView = itemView.findViewById(R.id.itemNameEvent);
+
+
+        }
+    }
+
+
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
+
+        private List<String> mlist;
+        public RecyclerViewAdapter(List<String> list) {
+            this.mlist=list;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            LayoutInflater inflater=LayoutInflater.from(context);
+            return new RecyclerViewHolder(inflater, viewGroup);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int i) {
+            recyclerViewHolder.mTextView.setText(mlist.get(i));
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mlist.size();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void onStart(){
         super.onStart();

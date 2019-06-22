@@ -84,8 +84,8 @@ public class HomeFragment extends Fragment {
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
 
-        private List<String> mlist;
-        public RecyclerViewAdapter(List<String> list) {
+        private List<Event> mlist;
+        public RecyclerViewAdapter(List<Event> list) {
             this.mlist=list;
         }
 
@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int i) {
-            recyclerViewHolder.mTextView.setText(mlist.get(i));
+            recyclerViewHolder.mTextView.setText(mlist.get(i).getName());
 
         }
 
@@ -122,10 +122,10 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            List<String> list=new ArrayList<>();
+                            List<Event> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(jsonObject.getString("name"));
+                                list.add(new Event(jsonObject.getString("id"),jsonObject.getString("name")));
                             }
                             recyclerView.setAdapter(new RecyclerViewAdapter(list));
                         } catch (JSONException e) {

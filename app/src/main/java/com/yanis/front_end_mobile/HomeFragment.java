@@ -2,6 +2,7 @@ package com.yanis.front_end_mobile;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,6 +47,9 @@ public class HomeFragment extends Fragment {
     public Activity context;
     public PreferenceUtils utils;
 
+
+
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -62,30 +68,57 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private class RecyclerViewHolder extends RecyclerView.ViewHolder{
+
+
+
+
+
+
+    private class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private CardView mCardView;
         private TextView mTextView;
+        ItemEventClickListener itemEventClickListener;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
         }
 
-        public RecyclerViewHolder(LayoutInflater inflater, ViewGroup container){
+        RecyclerViewHolder(LayoutInflater inflater, ViewGroup container){
             super(inflater.inflate(R.layout.card_view,container,false));
 
             mCardView = itemView.findViewById(R.id.card_container);
             mTextView = itemView.findViewById(R.id.itemNameEvent);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            this.itemEventClickListener.onItemEventClickListener(v, getLayoutPosition());
 
+        }
+
+        public void setItemEventClickListener(ItemEventClickListener itemEventClickListener){
+            this.itemEventClickListener=itemEventClickListener;
         }
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
 
-        private List<String> mlist;
-        public RecyclerViewAdapter(List<String> list) {
+        private List<Event> mlist;
+        public RecyclerViewAdapter(List<Event> list) {
             this.mlist=list;
         }
 
@@ -98,7 +131,23 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int i) {
-            recyclerViewHolder.mTextView.setText(mlist.get(i));
+            recyclerViewHolder.mTextView.setText(mlist.get(i).getName());
+            Animation animation= AnimationUtils.loadAnimation(context,android.R.anim.slide_in_left);
+            recyclerViewHolder.itemView.startAnimation(animation);
+
+            recyclerViewHolder.setItemEventClickListener(new ItemEventClickListener() {
+                @Override
+                public void onItemEventClickListener(View view, int pos) {
+                    String id= mlist.get(pos).getId();
+                    String name= mlist.get(pos).getName();
+
+                    Intent intent=new Intent(context,DetailsEventActivity.class);
+                    intent.putExtra("iId",id);
+                    intent.putExtra("iName",name);
+
+                    context.startActivity(intent);
+                }
+            });
 
         }
 
@@ -107,6 +156,19 @@ public class HomeFragment extends Fragment {
             return mlist.size();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private void getAllEvent(final RecyclerView recyclerView) {
@@ -122,10 +184,10 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            List<String> list=new ArrayList<>();
+                            List<Event> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(jsonObject.getString("name"));
+                                list.add(new Event(jsonObject.getString("id"),jsonObject.getString("name")));
                             }
                             recyclerView.setAdapter(new RecyclerViewAdapter(list));
                         } catch (JSONException e) {

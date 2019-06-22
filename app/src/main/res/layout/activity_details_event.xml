@@ -4,20 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsEventActivity">
+    tools:context=".DetailsEventActivity"
+    android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/event_detail_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="232dp"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:foreground="@drawable/plane" />
 
-    <TextView
-        android:id="@+id/event_detail_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/event_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/event_detail_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:layout_weight="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="138dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/add_event" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="138dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/add_event" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="135dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/add_event" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/add_event" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/add_event" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/add_event" />
+        </TableRow>
+
+    </TableLayout>
+
 </LinearLayout>

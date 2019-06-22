@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsEventActivity" android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".CashEventActivity"></activity>
+        <activity android:name=".FriendEventActivity" />
+        <activity android:name=".InfoEventActivity" />
+        <activity android:name=".ChatEventActivity" />
+        <activity
+            android:name=".DetailsEventActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".FriendsActivity" />
         <activity android:name=".PrivacyActivity" />
         <activity android:name=".AboutUs" />

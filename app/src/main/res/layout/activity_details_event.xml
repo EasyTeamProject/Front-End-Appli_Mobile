@@ -15,6 +15,7 @@
         android:layout_weight="1"
         android:foreground="@drawable/plane" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -54,19 +55,22 @@
                 android:id="@+id/imageButton"
                 android:layout_width="138dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/add_event" />
+                android:background="@android:color/white"
+                app:srcCompat="@drawable/chat_event" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
                 android:layout_width="138dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/add_event" />
+                android:background="#FFFFFFFF"
+                app:srcCompat="@drawable/cash" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="135dp"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/add_event" />
+                android:background="#FFFFFFFF"
+                app:srcCompat="@drawable/info_event" />
         </TableRow>
 
         <TableRow
@@ -77,19 +81,22 @@
                 android:id="@+id/imageButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/add_event" />
+                android:background="#FFFFFFFF"
+                app:srcCompat="@drawable/group" />
 
             <ImageButton
                 android:id="@+id/imageButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/add_event" />
+                android:background="#FFFFFFFF"
+                app:srcCompat="@drawable/settings_event" />
 
             <ImageButton
                 android:id="@+id/imageButton6"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/add_event" />
+                android:background="#FFFFFFFF"
+                app:srcCompat="@drawable/survey" />
         </TableRow>
 
     </TableLayout>

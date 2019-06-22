@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class DetailsEventActivity extends AppCompatActivity {
@@ -24,5 +25,41 @@ public class DetailsEventActivity extends AppCompatActivity {
 
         mEventId.setText(mId);
         mEventName.setText(mName);
+    }
+
+
+    public void onChatPressed(View view){
+        Intent i =new Intent(this,ChatEventActivity.class);
+        startActivity(i);
+    }
+
+
+    public void onInfoPressed(View view){
+        Intent i =new Intent(this,InfoEventActivity.class);
+        startActivity(i);
+    }
+
+
+    public void onSettingPressed(View view){
+        Intent i =new Intent(this,InfoEventActivity.class);
+        startActivity(i);
+    }
+
+
+    public void onCashPressed(View view){
+        Intent i =new Intent(this,InfoEventActivity.class);
+        startActivity(i);
+    }
+
+
+    public void onFriendPressed(View view){
+        Intent i =new Intent(this,InfoEventActivity.class);
+        startActivity(i);
+    }
+
+
+    public void onSurveyPressed(View view){
+        Intent i =new Intent(this,InfoEventActivity.class);
+        startActivity(i);
     }
 }

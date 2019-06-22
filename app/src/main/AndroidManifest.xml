@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CashEventActivity"></activity>
+        <activity android:name=".SurveyEventActivity"></activity>
+        <activity android:name=".SettingEventActivity" />
+        <activity android:name=".CashEventActivity" />
         <activity android:name=".FriendEventActivity" />
         <activity android:name=".InfoEventActivity" />
         <activity android:name=".ChatEventActivity" />

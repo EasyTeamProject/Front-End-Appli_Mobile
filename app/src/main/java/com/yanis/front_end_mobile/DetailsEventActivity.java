@@ -41,25 +41,25 @@ public class DetailsEventActivity extends AppCompatActivity {
 
 
     public void onSettingPressed(View view){
-        Intent i =new Intent(this,InfoEventActivity.class);
+        Intent i =new Intent(this,SettingEventActivity.class);
         startActivity(i);
     }
 
 
     public void onCashPressed(View view){
-        Intent i =new Intent(this,InfoEventActivity.class);
+        Intent i =new Intent(this,CashEventActivity.class);
         startActivity(i);
     }
 
 
     public void onFriendPressed(View view){
-        Intent i =new Intent(this,InfoEventActivity.class);
+        Intent i =new Intent(this,FriendEventActivity.class);
         startActivity(i);
     }
 
 
     public void onSurveyPressed(View view){
-        Intent i =new Intent(this,InfoEventActivity.class);
+        Intent i =new Intent(this,SurveyEventActivity.class);
         startActivity(i);
     }
 }

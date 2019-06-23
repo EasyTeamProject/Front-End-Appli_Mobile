@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddEventFragment">
+    tools:context=".AddRefundActivity">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:text="Add event"
+        android:text="Add refund"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginLeft="10dp"/>
@@ -40,13 +40,13 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/editTextNameAddEvent"
+                android:id="@+id/editTextNameAddRefund"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Name event"
+                android:hint="From who?"
                 android:inputType="textMultiLine|textPersonName"
                 android:singleLine="false" />
         </android.support.v7.widget.CardView>
@@ -59,34 +59,15 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/editTextDateAddEvent"
+                android:id="@+id/editTextPlaceRefund"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:autoText="false"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Date(aaaa-mm-jj)"
-                android:inputType="date"
-                android:singleLine="false" />
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="start|right"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="10dp">
-
-            <EditText
-                android:id="@+id/editTextPlace"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:hint="Place"
+                android:hint="To who?"
                 android:inputType="textPersonName"
-                android:singleLine="false"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="10dp"/>
+                android:singleLine="false" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -96,14 +77,14 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/editTextSubject"
+                android:id="@+id/editTextSubjectRefund"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Subject"
-                android:inputType="textMultiLine|textPersonName"
+                android:hint="how much?"
+                android:inputType="number"
                 android:singleLine="false" />
         </android.support.v7.widget.CardView>
 
@@ -113,6 +94,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="70dp"
             android:background="@drawable/selected_tab_background"
+            android:onClick="onAddPressed"
             android:shadowRadius="20"
             android:text="Add"
             android:textStyle="bold"

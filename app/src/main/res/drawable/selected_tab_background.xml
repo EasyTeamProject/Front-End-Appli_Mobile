@@ -8,6 +8,6 @@
 
     <!-- color of the selected tab -->
     <solid
-        android:color="@color/design_default_color_primary_dark"/>
+        android:color="@color/ColorBlue"/>
 
 </shape>

@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardViewFamilyName">
 
         <EditText
-            android:id="@+id/editTextNameAddEvent"
+            android:id="@+id/editTextQuestionSurvey"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"

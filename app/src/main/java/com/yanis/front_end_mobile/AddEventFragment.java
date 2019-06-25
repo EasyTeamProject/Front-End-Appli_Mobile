@@ -68,7 +68,7 @@ requestQueue.add(objectRequest);*/
 
     private void postDataWithAccessToken() {
 
-        final String URL = "http://192.168.1.12:3000/events?name="+editTextName.getText().toString().trim()+"&date="+editTextDate.getText().toString().trim();
+        final String URL = "http://192.168.43.157:3000/events?name="+editTextName.getText().toString().trim()+"&date="+editTextDate.getText().toString().trim();
         final String Token = utils.getToken(context);
 
 

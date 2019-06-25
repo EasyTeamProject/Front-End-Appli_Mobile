@@ -91,7 +91,7 @@ public class FriendEventActivity extends AppCompatActivity {
 
     private void getAllFriends(final RecyclerView recyclerView) {
 
-        final String URL = "http://192.168.1.12:3000/events";
+        final String URL = "http://192.168.43.157:3000/events";
         final String Token = utils.getToken(this);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(

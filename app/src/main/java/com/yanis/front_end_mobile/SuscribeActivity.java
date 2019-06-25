@@ -40,7 +40,7 @@ public class SuscribeActivity extends AppCompatActivity {
     public void subscribe(final View view){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        String URL = "http://192.168.1.12:3000/users?email="+editTextEmail.getText().toString()+"&password="+editTextPassword.getText().toString();
+        String URL = "http://192.168.43.157:3000/users?email="+editTextEmail.getText().toString()+"&password="+editTextPassword.getText().toString();
         if(editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
             JsonObjectRequest objectRequest = new JsonObjectRequest(
                     Request.Method.POST,

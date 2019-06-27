@@ -54,7 +54,7 @@
             <ImageButton
                 android:id="@+id/imageButton"
                 android:layout_width="138dp"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="@android:color/white"
                 android:onClick="onChatPressed"
                 app:srcCompat="@drawable/chat_event" />
@@ -62,7 +62,7 @@
             <ImageButton
                 android:id="@+id/imageButton2"
                 android:layout_width="138dp"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="#FFFFFFFF"
                 android:onClick="onCashPressed"
                 app:srcCompat="@drawable/cash" />
@@ -70,10 +70,39 @@
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="135dp"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="#FFFFFFFF"
                 android:onClick="onInfoPressed"
                 app:srcCompat="@drawable/info_event" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="10dp" >
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:text="Chat"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:text="Cash"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:text="Information"
+                android:textAlignment="center" />
         </TableRow>
 
         <TableRow
@@ -83,7 +112,7 @@
             <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="#FFFFFFFF"
                 android:onClick="onFriendPressed"
                 app:srcCompat="@drawable/group" />
@@ -91,7 +120,7 @@
             <ImageButton
                 android:id="@+id/imageButton5"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="#FFFFFFFF"
                 android:onClick="onSettingPressed"
                 app:srcCompat="@drawable/settings_event" />
@@ -99,10 +128,39 @@
             <ImageButton
                 android:id="@+id/imageButton6"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="#FFFFFFFF"
                 android:onClick="onSurveyPressed"
                 app:srcCompat="@drawable/survey" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="#FFFFFF"
+                android:text="Friends"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="#FFFFFF"
+                android:text="Settings"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="#FFFFFF"
+                android:text="Survey"
+                android:textAlignment="center" />
         </TableRow>
 
     </TableLayout>

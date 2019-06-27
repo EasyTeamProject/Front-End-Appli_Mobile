@@ -4,29 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:id="@+id/refund_fragment">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="279dp"
-        android:text="text refund"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    android:id="@+id/refunds_fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="181dp"
+        android:layout_height="463dp"
         android:gravity="center|bottom"
         android:orientation="vertical">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view_expense"
+            android:layout_width="match_parent"
+            android:layout_height="418dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="20dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp" />
+
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button4"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="371dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal|center"
             android:background="@drawable/selected_tab_background"
-            android:onClick="onAddRefundPressed"
+            android:onClick="onAddExpensePressed"
             android:text="Add refund"
             android:textColor="@android:color/white" />
     </LinearLayout>

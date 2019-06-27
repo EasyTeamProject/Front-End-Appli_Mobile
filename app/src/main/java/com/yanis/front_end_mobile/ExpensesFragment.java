@@ -51,7 +51,7 @@ public class ExpensesFragment extends Fragment {
         View v = inflater.inflate(R.layout.expenses_fragment, container, false);
         RecyclerView recyclerView=v.findViewById(R.id.recycle_view_expense);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        getAllEvent(recyclerView);
+        getAllExpense(recyclerView);
         return v;
     }
 
@@ -138,7 +138,7 @@ public class ExpensesFragment extends Fragment {
 
 
 
-    private void getAllEvent(final RecyclerView recyclerView) {
+    private void getAllExpense(final RecyclerView recyclerView) {
 
         final String URL = "https://api.myjson.com/bins/uykbn";
         final String Token = utils.getToken(context);

@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login(final View view){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        String URL = "http://192.168.1.12:3000/sessions?email="+editTextEmailLogin.getText().toString().trim()+"&password="+editTextPasswordLogin.getText().toString().trim();
+        String URL = "http://192.168.43.157:3000/sessions?email="+editTextEmailLogin.getText().toString().trim()+"&password="+editTextPasswordLogin.getText().toString().trim();
             JsonObjectRequest objectRequest = new JsonObjectRequest(
                     Request.Method.POST,
                     URL,

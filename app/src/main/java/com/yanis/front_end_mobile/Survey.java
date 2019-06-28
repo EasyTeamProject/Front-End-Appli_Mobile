@@ -79,6 +79,11 @@ class Answer{
     String answer;
     String number_answer;
 
+    public Answer(String answer, String number_answer) {
+        this.answer = answer;
+        this.number_answer = number_answer;
+    }
+
     public String getAnswer() {
         return answer;
     }

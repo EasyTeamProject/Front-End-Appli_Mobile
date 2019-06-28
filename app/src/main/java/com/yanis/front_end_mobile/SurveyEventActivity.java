@@ -20,10 +20,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,10 +127,10 @@ public class SurveyEventActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
             recyclerViewHolder.mTextViewUserSurvey.setText(mlist.get(i).getNameUser());
             recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());
-            //recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne().getAnswer());
-            //recyclerViewHolder.mTextViewNumberOne.setText(mlist.get(i).getAnswerOne().getNumber_answer());
-            //recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerOne().getAnswer());
-            //recyclerViewHolder.mTextViewNumberTwo.setText(mlist.get(i).getAnswerOne().getNumber_answer());
+            recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne().getAnswer());
+            recyclerViewHolder.mTextViewNumberOne.setText(mlist.get(i).getAnswerOne().getNumber_answer());
+            recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo().getAnswer());
+            recyclerViewHolder.mTextViewNumberTwo.setText(mlist.get(i).getAnswerTwo().getNumber_answer());
 
         }
 
@@ -149,7 +153,7 @@ public class SurveyEventActivity extends AppCompatActivity {
 
     private void getAllSurveys(final RecyclerView recyclerView) {
 
-        final String URL = "https://api.myjson.com/bins/u0aiz";
+        final String URL = "https://api.myjson.com/bins/128xjf";
         final String Token = utils.getToken(this);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
@@ -163,10 +167,16 @@ public class SurveyEventActivity extends AppCompatActivity {
                             List<Survey> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
+
+                                JSONObject answerOne=(JSONObject)jsonObject.get("answer_one");
+                                JSONObject answerTwo=(JSONObject)jsonObject.get("answer_two");
+
                                 list.add(new Survey(jsonObject.getString("id"),
                                         jsonObject.getString("id_event"),
                                         jsonObject.getString("nameUser"),
-                                        jsonObject.getString("question")
+                                        jsonObject.getString("question"),
+                                        new Answer(answerOne.get("answer").toString(),answerOne.get("number").toString()),
+                                        new Answer(answerTwo.get("answer").toString(),answerTwo.get("number").toString())
                                 ));
                             }
                             recyclerView.setAdapter(new RecyclerViewAdapter(list,SurveyEventActivity.this));

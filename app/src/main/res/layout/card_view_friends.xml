@@ -9,7 +9,10 @@
     android:clickable="true"
     android:foreground="?selectableItemBackground"
     card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="3dp">
+    card_view:cardElevation="3dp"
+    card_view:cardBackgroundColor="#ACACAC"
+    card_view:contentPadding="5dp"
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,14 +25,15 @@
             android:layout_height="69dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            card_view:srcCompat="@drawable/person" />
+            android:layout_marginBottom="10dp"
+            card_view:srcCompat="@drawable/avatar" />
 
         <TextView
             android:id="@+id/itemNameFriend"
             android:layout_width="291dp"
             android:layout_height="62dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:textColor="#040404"
             android:textSize="24sp" />
     </LinearLayout>

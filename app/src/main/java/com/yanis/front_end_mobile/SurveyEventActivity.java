@@ -6,13 +6,16 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,6 +53,8 @@ public class SurveyEventActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getAllSurveys(recyclerView);
+
+
     }
 
 
@@ -120,6 +125,47 @@ public class SurveyEventActivity extends AppCompatActivity {
         public SurveyEventActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             LayoutInflater inflater=LayoutInflater.from(mCtx);
             View view=inflater.inflate(R.layout.card_view_survey,null);
+            final Button buttonOne = view.findViewById(R.id.buttonOne);
+            final Button buttonTwo = view.findViewById(R.id.buttonTwo);
+
+            buttonOne.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        if (buttonOne.getText().toString().equals("+")) {
+                            buttonOne.setText("-");
+                            return;
+                        }
+                        if (buttonOne.getText().toString().equals("-")) {
+                            buttonOne.setText("+");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Toast.makeText(v.getContext(),e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                    }
+                }
+            } );
+
+            buttonTwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        if (buttonTwo.getText().toString().equals("+")) {
+                            buttonTwo.setText("-");
+                            return;
+                        }
+                        if (buttonTwo.getText().toString().equals("-")) {
+                            buttonTwo.setText("+");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Toast.makeText(v.getContext(),e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                    }
+                }
+            } );
+
             return new RecyclerViewHolder(view);
         }
 

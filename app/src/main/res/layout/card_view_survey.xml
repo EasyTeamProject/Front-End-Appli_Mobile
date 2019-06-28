@@ -6,7 +6,12 @@
     android:layout_height="240dp"
     android:layout_margin="10dp"
     android:clickable="false"
-    card_view:cardCornerRadius="12dp">
+    card_view:cardCornerRadius="12dp"
+    card_view:cardBackgroundColor="#ACACAC"
+    card_view:cardElevation="5dp"
+    card_view:contentPadding="5dp"
+    card_view:cardUseCompatPadding="true"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,13 +60,13 @@
 
             <TextView
                 android:id="@+id/TextViewAnswerOne"
-                android:layout_width="265dp"
+                android:layout_width="226dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:text="Reponse 1" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonOne"
                 android:layout_width="43dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
@@ -85,13 +90,13 @@
 
             <TextView
                 android:id="@+id/TextViewAnswerTwo"
-                android:layout_width="265dp"
+                android:layout_width="226dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:text="Réponse 2" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/buttonTwo"
                 android:layout_width="43dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"

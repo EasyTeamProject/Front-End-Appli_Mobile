@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_container_event_friend"
+    android:id="@+id/card_container_event_survey"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
-    android:clickable="true"
-    card_view:cardCornerRadius="12dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_height="240dp"
     android:layout_marginBottom="20dp"
-    android:layout_marginTop="20dp">
+    android:clickable="false"
+    card_view:cardCornerRadius="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +22,7 @@
             card_view:srcCompat="@drawable/person" />
 
         <TextView
-            android:id="@+id/itemNameUserSurvey"
+            android:id="@+id/TextViewUserSurvey"
             android:layout_width="237dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -43,9 +40,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/principalQuestion"
             android:layout_width="match_parent"
             android:layout_height="73dp"
+            android:layout_marginLeft="10dp"
             android:inputType="textMultiLine"
             android:text="Question?" />
 
@@ -55,9 +53,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/TextViewAnswerOne"
                 android:layout_width="265dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:text="Reponse 1" />
 
             <Button
@@ -68,7 +67,7 @@
                 android:text="+" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/TextViewNumberOne"
                 android:layout_width="33dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -84,9 +83,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/TextViewAnswerTwo"
                 android:layout_width="265dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:text="Réponse 2" />
 
             <Button
@@ -95,8 +95,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:text="+" />
+
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/TextViewNumberTwo"
                 android:layout_width="33dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

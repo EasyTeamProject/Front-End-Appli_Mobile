@@ -33,6 +33,11 @@
         android:orientation="vertical"
         android:gravity="center|bottom">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view_survey"
+            android:layout_width="match_parent"
+            android:layout_height="470dp" />
+
         <Button
             android:id="@+id/buttonAddSurvey"
             android:layout_width="match_parent"

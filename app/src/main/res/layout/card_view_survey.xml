@@ -4,7 +4,7 @@
     android:id="@+id/card_container_event_survey"
     android:layout_width="match_parent"
     android:layout_height="240dp"
-    android:layout_marginBottom="20dp"
+    android:layout_margin="10dp"
     android:clickable="false"
     card_view:cardCornerRadius="12dp">
 
@@ -45,7 +45,8 @@
             android:layout_height="73dp"
             android:layout_marginLeft="10dp"
             android:inputType="textMultiLine"
-            android:text="Question?" />
+            android:text="Question?"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"

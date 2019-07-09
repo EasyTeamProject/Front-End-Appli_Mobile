@@ -47,7 +47,6 @@ public class SurveyEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_event);
-
         PreferenceUtils utils = new PreferenceUtils();
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view_survey);
         recyclerView.setHasFixedSize(true);
@@ -64,8 +63,11 @@ public class SurveyEventActivity extends AppCompatActivity {
 
 
     public void onAddSurveyPressed(View view){
-        Intent i =new Intent(this,AddSurveyActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,AddSurveyActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 
 

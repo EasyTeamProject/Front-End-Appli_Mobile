@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -53,8 +54,12 @@ public class DetailsEventActivity extends AppCompatActivity {
 
 
     public void onFriendPressed(View view){
-        Intent i =new Intent(this,FriendEventActivity.class);
-        startActivity(i);
+
+        Intent intent=new Intent(this,FriendEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+        this.startActivity(intent);
     }
 
 

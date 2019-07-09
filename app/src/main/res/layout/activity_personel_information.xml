@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper"
+    tools:context=".PersonelInformationActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo_without_name" />
+
+    <TextView
+        android:id="@+id/Settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="70dp"
+        android:text="Personel information"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/edit_information_event"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="Yanis" />
+
+        <Button
+            android:id="@+id/edit_date_event"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="AKLI" />
+
+        <Button
+            android:id="@+id/edit_place_event"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="01/01/aaaa" />
+
+    </LinearLayout>
+
+</FrameLayout>

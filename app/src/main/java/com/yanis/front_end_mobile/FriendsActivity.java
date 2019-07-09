@@ -48,6 +48,12 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
+
+
     private class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
         private CardView mCardView;
@@ -59,6 +65,13 @@ public class FriendsActivity extends AppCompatActivity {
             mTextView = itemView.findViewById(R.id.itemNameFriend);
         }
     }
+
+
+
+
+
+
+
 
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<FriendsActivity.RecyclerViewHolder>{
@@ -87,6 +100,10 @@ public class FriendsActivity extends AppCompatActivity {
             return mlist.size();
         }
     }
+
+
+
+
 
 
     private void getAllFriends(final RecyclerView recyclerView) {

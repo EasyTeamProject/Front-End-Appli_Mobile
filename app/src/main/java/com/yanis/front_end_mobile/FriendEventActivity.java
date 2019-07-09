@@ -1,6 +1,7 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -90,22 +92,26 @@ public class FriendEventActivity extends AppCompatActivity {
 
 
     private void getAllFriends(final RecyclerView recyclerView) {
-
-        final String URL = "http://192.168.43.157:3000/events";
+        Intent intent=getIntent();
+        String event_id = intent.getStringExtra("event_id");
+        Log.i("eventID", "getAllFriends: " +  event_id);
+        final String URL = "https://api.myjson.com/bins/sejfr";
         final String Token = utils.getToken(this);
 
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,
                 null,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         try {
-                            List<String> list=new ArrayList<>();
-                            for (int i=0; i < response.length(); i++){
-                                JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(jsonObject.getString("name"));
+                            ArrayList<String> list=new ArrayList<>();
+                            JSONArray friendResponse = (JSONArray)response.get("members");
+
+                            for (int i=0; i < friendResponse.length(); i++){
+                                JSONObject jsonObject=friendResponse.getJSONObject(i);
+                                list.add(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
                             }
                             recyclerView.setAdapter(new FriendEventActivity.RecyclerViewAdapter(list,FriendEventActivity.this));
                         } catch (JSONException e) {

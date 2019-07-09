@@ -2,14 +2,17 @@ package com.yanis.front_end_mobile;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,6 +38,7 @@ public class AddEventFragment extends Fragment {
     public Activity context;
     public PreferenceUtils utils;
 
+
     public AddEventFragment() {
         // Required empty public constructor
     }
@@ -46,6 +50,7 @@ public class AddEventFragment extends Fragment {
         // Inflate the layout for this fragment
         context=getActivity();
         utils = new PreferenceUtils();
+
         View v= inflater.inflate(R.layout.fragment_add_event, container, false);
         editTextName= (EditText) v.findViewById(R.id.editTextNameAddEvent);
         editTextDate= (EditText) v.findViewById(R.id.editTextDateAddEvent);
@@ -57,14 +62,12 @@ public class AddEventFragment extends Fragment {
         btnAddEvent.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 postDataWithAccessToken();
+                Intent i =new Intent(context,HomeActivity.class);
+                startActivity(i);
             }
         });
     }
 
-    /*
-
-
-requestQueue.add(objectRequest);*/
 
     private void postDataWithAccessToken() {
 

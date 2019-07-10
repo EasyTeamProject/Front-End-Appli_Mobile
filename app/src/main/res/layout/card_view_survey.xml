@@ -26,16 +26,6 @@
             android:layout_marginTop="15dp"
             card_view:srcCompat="@drawable/person" />
 
-        <TextView
-            android:id="@+id/TextViewUserSurvey"
-            android:layout_width="237dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:text="Name user"
-            android:textColor="#040404"
-            android:textSize="24sp" />
-
     </LinearLayout>
 
     <LinearLayout

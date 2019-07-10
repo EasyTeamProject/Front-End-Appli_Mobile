@@ -95,7 +95,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="70dp"
             android:background="@drawable/selected_tab_background"
-            android:onClick="PostSurvey"
+            android:onClick="addSurvey"
             android:shadowRadius="20"
             android:text="Add"
             android:textStyle="bold"

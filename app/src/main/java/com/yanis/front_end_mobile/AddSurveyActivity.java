@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,35 @@ public class AddSurveyActivity extends AppCompatActivity {
     }
 
 
-    public void PostSurvey(View view) {
+    public void addSurvey(View view){
+
+        JSONArray responses = new JSONArray();
+        responses.add("YESSS");
+        responses.add("NOOO");
+
+        JSONObject first = new JSONObject();
+        try {
+            first.put("text","test");
+            first.put("responses",responses);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray questions = new JSONArray();
+        questions.add(first);
+        JSONObject survey= new JSONObject();
+        try {
+            survey.put("name","test first survey");
+            survey.put("questions", questions);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("json string "+ survey);
+        PostSurvey(survey);
+    }
+
+    public void PostSurvey(JSONObject survey) {
         final Intent intent=getIntent();
         String event_id = intent.getStringExtra("event_id");
         final String URL = "http://192.168.43.157:3000/events/"+event_id+"/survey";
@@ -54,19 +83,6 @@ public class AddSurveyActivity extends AppCompatActivity {
 
         Log.i("survey", "PostSurvey: "+URL);
 
-        try {
-        JSONObject survey = new JSONObject();
-        JSONArray questions = new JSONArray();
-        JSONObject text = new JSONObject();
-
-            text.put("text","questions 10000 ?");
-
-        JSONArray responses = new JSONArray();
-        responses.add("yes");
-        responses.add("No");
-        questions.add(text);
-        questions.add(responses);
-        survey.put("questions", questions);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
@@ -97,9 +113,6 @@ public class AddSurveyActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
     }
 

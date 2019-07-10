@@ -80,7 +80,6 @@ public class SurveyEventActivity extends AppCompatActivity {
     private class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
         private CardView mCardView;
-        private TextView mTextViewUserSurvey;
         private TextView mTextViewPrincipalQuestion;
         private TextView mTextViewAnswerOne;
         private TextView mTextViewNumberOne;
@@ -91,7 +90,6 @@ public class SurveyEventActivity extends AppCompatActivity {
             super(itemView);
 
             mCardView = itemView.findViewById(R.id.card_container_event_survey);
-            mTextViewUserSurvey = itemView.findViewById(R.id.TextViewUserSurvey);
             mTextViewPrincipalQuestion = itemView.findViewById(R.id.principalQuestion);
             mTextViewAnswerOne = itemView.findViewById(R.id.TextViewAnswerOne);
             mTextViewNumberOne = itemView.findViewById(R.id.TextViewNumberOne);
@@ -171,12 +169,11 @@ public class SurveyEventActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
-            recyclerViewHolder.mTextViewUserSurvey.setText(mlist.get(i).getNameUser());
             recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());
-            recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne().getAnswer());
-            recyclerViewHolder.mTextViewNumberOne.setText(mlist.get(i).getAnswerOne().getNumber_answer());
-            recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo().getAnswer());
-            recyclerViewHolder.mTextViewNumberTwo.setText(mlist.get(i).getAnswerTwo().getNumber_answer());
+            recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne());
+            recyclerViewHolder.mTextViewNumberOne.setText("0");
+            recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo());
+            recyclerViewHolder.mTextViewNumberTwo.setText("0");
 
         }
 
@@ -199,7 +196,10 @@ public class SurveyEventActivity extends AppCompatActivity {
 
     private void getAllSurveys(final RecyclerView recyclerView) {
 
-        final String URL = "https://api.myjson.com/bins/128xjf";
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
+
+        final String URL = "http://192.168.43.157:3000/events/13/survey";
         final String Token = utils.getToken(this);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
@@ -209,21 +209,29 @@ public class SurveyEventActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        System.out.println(response.toString());
                         try {
                             List<Survey> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
 
-                                JSONObject answerOne=(JSONObject)jsonObject.get("answer_one");
-                                JSONObject answerTwo=(JSONObject)jsonObject.get("answer_two");
+                                JSONArray questions= (JSONArray)jsonObject.get("questions");
+                                System.out.println("questions "+ questions.toString());
+
+                                JSONObject firstObject = questions.getJSONObject(0);
+                                System.out.println("firstObject"+firstObject);
+
+                                JSONArray responses= (JSONArray)firstObject.get("responses");
+                                System.out.println(responses.toString());
+
+                                JSONObject answerOne = responses.getJSONObject(0);
+                                JSONObject answerTwo = responses.getJSONObject(1);
 
                                 list.add(new Survey(jsonObject.getString("id"),
-                                        jsonObject.getString("id_event"),
-                                        jsonObject.getString("nameUser"),
-                                        jsonObject.getString("question"),
-                                        new Answer(answerOne.get("answer").toString(),answerOne.get("number").toString()),
-                                        new Answer(answerTwo.get("answer").toString(),answerTwo.get("number").toString())
-                                ));
+                                        jsonObject.getString("event_id"),
+                                        firstObject.getString("question"),
+                                        answerOne.getString("text"),
+                                        answerTwo.getString("text")));
                             }
                             recyclerView.setAdapter(new RecyclerViewAdapter(list,SurveyEventActivity.this));
                         } catch (JSONException e) {

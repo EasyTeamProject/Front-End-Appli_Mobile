@@ -3,22 +3,13 @@ package com.yanis.front_end_mobile;
 public class Survey {
     String id;
     String id_event;
-    String nameUser;
     String question;
-    Answer answerOne;
-    Answer answerTwo;
+    String answerOne;
+    String answerTwo;
 
-    public Survey(String id, String id_event, String nameUser, String question) {
+    public Survey(String id, String id_event, String question, String answerOne, String answerTwo) {
         this.id = id;
         this.id_event = id_event;
-        this.nameUser = nameUser;
-        this.question = question;
-    }
-
-    public Survey(String id, String id_event, String nameUser, String question, Answer answerOne, Answer answerTwo) {
-        this.id = id;
-        this.id_event = id_event;
-        this.nameUser = nameUser;
         this.question = question;
         this.answerOne = answerOne;
         this.answerTwo = answerTwo;
@@ -40,14 +31,6 @@ public class Survey {
         this.id_event = id_event;
     }
 
-    public String getNameUser() {
-        return nameUser;
-    }
-
-    public void setNameUser(String nameUser) {
-        this.nameUser = nameUser;
-    }
-
     public String getQuestion() {
         return question;
     }
@@ -56,19 +39,19 @@ public class Survey {
         this.question = question;
     }
 
-    public Answer getAnswerOne() {
+    public String getAnswerOne() {
         return answerOne;
     }
 
-    public void setAnswerOne(Answer answerOne) {
+    public void setAnswerOne(String answerOne) {
         this.answerOne = answerOne;
     }
 
-    public Answer getAnswerTwo() {
+    public String getAnswerTwo() {
         return answerTwo;
     }
 
-    public void setAnswerTwo(Answer answerTwo) {
+    public void setAnswerTwo(String answerTwo) {
         this.answerTwo = answerTwo;
     }
 }

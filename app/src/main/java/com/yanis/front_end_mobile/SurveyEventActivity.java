@@ -198,7 +198,7 @@ public class SurveyEventActivity extends AppCompatActivity {
 
         Intent i=getIntent();
         String event_id = i.getStringExtra("event_id");
-
+        //TODO change the event
         final String URL = "http://192.168.43.157:3000/events/13/survey";
         final String Token = utils.getToken(this);
 
@@ -216,13 +216,10 @@ public class SurveyEventActivity extends AppCompatActivity {
                                 JSONObject jsonObject=response.getJSONObject(i);
 
                                 JSONArray questions= (JSONArray)jsonObject.get("questions");
-                                System.out.println("questions "+ questions.toString());
 
                                 JSONObject firstObject = questions.getJSONObject(0);
-                                System.out.println("firstObject"+firstObject);
 
                                 JSONArray responses= (JSONArray)firstObject.get("responses");
-                                System.out.println(responses.toString());
 
                                 JSONObject answerOne = responses.getJSONObject(0);
                                 JSONObject answerTwo = responses.getJSONObject(1);

@@ -39,35 +39,11 @@
             android:layout_marginTop="150dp"
             app:cardCornerRadius="10dp">
 
-            <EditText
-                android:id="@+id/editTextNameAddExpense"
+            <Spinner
+                android:id="@+id/spinnerUserExpense"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:hint="From who?"
-                android:inputType="textMultiLine|textPersonName"
-                android:singleLine="false" />
-        </android.support.v7.widget.CardView>
+                android:layout_height="match_parent" />
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="start|right"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="10dp">
-
-            <EditText
-                android:id="@+id/editTextPlaceExpense"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:hint="To who?"
-                android:inputType="textPersonName"
-                android:singleLine="false" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -77,13 +53,13 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/editTextSubjectExpense"
+                android:id="@+id/editTextPriceExpense"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="How much?"
+                android:hint="how much?"
                 android:inputType="number"
                 android:singleLine="false" />
         </android.support.v7.widget.CardView>

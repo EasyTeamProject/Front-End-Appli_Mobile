@@ -2,7 +2,9 @@ package com.yanis.front_end_mobile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,6 +39,7 @@ public class ExpensesFragment extends Fragment {
     public TextView textView;
     public Activity context;
     public PreferenceUtils utils;
+    public HashMap<String,String> hashMap;
 
     View view;
     public ExpensesFragment() {
@@ -48,6 +51,25 @@ public class ExpensesFragment extends Fragment {
 
         PreferenceUtils utils = new PreferenceUtils();
         context=getActivity();
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(context);
+        String str= m.getString("Response", "");
+        hashMap= new HashMap<>();
+        JSONObject jsonObject ;
+
+
+        try {
+            jsonObject = new JSONObject(str);
+            JSONArray friendResponse = (JSONArray)jsonObject.get("members");
+            for (int i=0; i < friendResponse.length(); i++){
+                JSONObject friendObject=friendResponse.getJSONObject(i);
+                hashMap.put(friendObject.getString("user_id"), friendObject.getString("last_name"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         View v = inflater.inflate(R.layout.expenses_fragment, container, false);
         RecyclerView recyclerView=v.findViewById(R.id.recycle_view_expense);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -140,7 +162,7 @@ public class ExpensesFragment extends Fragment {
 
     private void getAllExpense(final RecyclerView recyclerView) {
 
-        final String URL = "https://api.myjson.com/bins/uykbn";
+        final String URL = "http://192.168.43.157:3000/events/5/transactions";
         final String Token = utils.getToken(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
@@ -154,7 +176,7 @@ public class ExpensesFragment extends Fragment {
                             List<ExpenseRefund> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(new ExpenseRefund(jsonObject.getString("id"),jsonObject.getString("person1"),jsonObject.getString("person2"),jsonObject.getString("price")));
+                                list.add(new ExpenseRefund(jsonObject.getString("id"),hashMap.get(jsonObject.getString("to_id")),hashMap.get(jsonObject.getString("from_id")),jsonObject.getString("amount")));
                             }
                             recyclerView.setAdapter(new ExpensesFragment.RecyclerViewAdapter(list));
                         } catch (JSONException e) {

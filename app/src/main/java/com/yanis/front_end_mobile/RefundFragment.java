@@ -41,7 +41,6 @@ public class RefundFragment extends Fragment {
     public PreferenceUtils utils;
 
     View view;
-    public ArrayList<String> arrayList;
     public HashMap<String,String> hashMap;
 
 

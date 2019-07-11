@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,6 +45,69 @@ public class SettingEventActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+    public void onEditEventPressed(View view) {
+        Intent i = new Intent(this, DetailsEventActivity.class);
+        EditEvent();
+        startActivity(i);
+    }
+
+
+
+
+
+
+    private void EditEvent() {
+
+        final String URL = "http://192.168.43.157:3000/events/5";
+        final String Token = utils.getToken(this);
+
+        JSONObject Event = new JSONObject();
+        try {
+            Event.put("name",editTextName.getText().toString().trim());
+            Event.put("date",editTextDate.getText().toString().trim());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.PATCH,
+                URL,
+                Event,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(SettingEventActivity.this, "Event edited successfuly", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(SettingEventActivity.this, "Event not edited successfuly", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "bearer");
+                headers.put("Content-Type", "application/json");
+                headers.put("JWT",Token);
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
+
+    }
+
+
+
+
 
 
 

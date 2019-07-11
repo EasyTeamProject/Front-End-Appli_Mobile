@@ -122,6 +122,7 @@
             android:layout_marginTop="70dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/selected_tab_background"
+            android:onClick="onEditEventPressed"
             android:shadowRadius="20"
             android:text="Submit edit"
             android:textStyle="bold" />

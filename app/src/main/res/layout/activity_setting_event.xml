@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,45 +29,103 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/edit_information_event"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
+            android:layout_gravity="start|right"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="150dp"
             android:layout_marginRight="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Edit information" />
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/editTextNameEventDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="Name event"
+                android:inputType="textMultiLine|textPersonName"
+                android:singleLine="false" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="start|right"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/editTextDateEventDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:autoText="false"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="Date(aaaa-mm-jj)"
+                android:inputType="date"
+                android:singleLine="false" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="start|right"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/editTextPlaceEventDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="Place"
+                android:inputType="textPersonName"
+                android:singleLine="false" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="start|right"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp">
+
+            <EditText
+                android:id="@+id/editTextSubjectEventDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="Subject"
+                android:inputType="textMultiLine|textPersonName"
+                android:singleLine="false" />
+        </android.support.v7.widget.CardView>
 
         <Button
-            android:id="@+id/edit_date_event"
+            android:id="@+id/buttonEditEvent"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Edit Date" />
-
-        <Button
-            android:id="@+id/edit_place_event"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Edit Place" />
-
-        <Button
-            android:id="@+id/edit_subject_event"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="Edit Subject" />
+            android:background="@drawable/selected_tab_background"
+            android:onClick="onEditEventPressed"
+            android:shadowRadius="20"
+            android:text="Submit edit"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

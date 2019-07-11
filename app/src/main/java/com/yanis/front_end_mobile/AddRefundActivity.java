@@ -70,7 +70,6 @@ public class AddRefundActivity extends AppCompatActivity implements AdapterView.
             spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        System.out.println(name);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -92,7 +91,6 @@ public class AddRefundActivity extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         name = parent.getItemAtPosition(position).toString();
 
-        System.out.println(name);
         Toast.makeText(parent.getContext(), name, Toast.LENGTH_SHORT).show();
     }
 

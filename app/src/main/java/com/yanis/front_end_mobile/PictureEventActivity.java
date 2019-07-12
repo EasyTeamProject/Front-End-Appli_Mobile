@@ -1,6 +1,7 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
@@ -61,10 +62,17 @@ public class PictureEventActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imageView;
         private CardView mCardView;
+
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +81,10 @@ public class PictureEventActivity extends AppCompatActivity {
             imageView = itemView.findViewById(R.id.my_image);
         }
     }
+
+
+
+
 
 
 
@@ -100,8 +112,22 @@ public class PictureEventActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int i) {
+        public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, final int i) {
             Picasso.get().load(list.get(i)).resize(500, 500).centerCrop().into(recyclerViewHolder.imageView);
+
+
+            recyclerViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String image= list.get(i);
+
+                    Intent intent=new Intent(PictureEventActivity.this,FullImageActivity.class);
+                    intent.putExtra("image",image);
+
+                    PictureEventActivity.this.startActivity(intent);
+                }
+
+            });
         }
 
 
@@ -110,6 +136,15 @@ public class PictureEventActivity extends AppCompatActivity {
             return list.size();
         }
     }
+
+
+
+
+
+
+
+
+
 
 
 

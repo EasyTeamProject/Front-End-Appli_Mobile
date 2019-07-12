@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoEventActivity">
+    tools:context=".PictureEventActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -18,18 +18,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="70dp"
-        android:text="Information"
+        android:text="Pictures"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView6"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_picture"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="150dp"
-        android:text="Info the the event ..."
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp" />
 
 </RelativeLayout>

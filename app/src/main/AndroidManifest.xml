@@ -3,6 +3,7 @@
     package="com.yanis.front_end_mobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PersonelInformationActivity"></activity>
+        <activity android:name=".FullImageActivity"></activity>
+        <activity android:name=".PersonelInformationActivity" />
         <activity android:name=".AddSurveyActivity" />
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".AddRefundActivity" />
@@ -20,7 +22,7 @@
         <activity android:name=".SettingEventActivity" />
         <activity android:name=".CashEventActivity" />
         <activity android:name=".FriendEventActivity" />
-        <activity android:name=".InfoEventActivity" />
+        <activity android:name=".PictureEventActivity" />
         <activity android:name=".ChatEventActivity" />
         <activity
             android:name=".DetailsEventActivity"

@@ -73,7 +73,7 @@
                 android:layout_height="70dp"
                 android:background="#FFFFFFFF"
                 android:onClick="onInfoPressed"
-                app:srcCompat="@drawable/info_event" />
+                app:srcCompat="@drawable/pictures" />
         </TableRow>
 
         <TableRow

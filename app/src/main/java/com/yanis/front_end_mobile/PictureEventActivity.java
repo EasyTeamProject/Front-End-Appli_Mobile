@@ -64,7 +64,10 @@ public class PictureEventActivity extends AppCompatActivity {
 
 
 
-
+    public void onAddPicPressed(View view){
+        Intent intent = new Intent(this,AddPictureActivity.class);
+        startActivity(intent);
+    }
 
 
 

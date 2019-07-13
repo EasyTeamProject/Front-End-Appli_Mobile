@@ -1,6 +1,7 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,8 @@ public class ChatEventActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         displayChatMessage(recyclerView);
 
+        Intent intent=getIntent();
+        final String event_id = intent.getStringExtra("event_id");
 
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -54,7 +57,7 @@ public class ChatEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText input= (EditText)findViewById(R.id.input);
-                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail()));
+                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),event_id));
                 input.setText("");
             }
         });
@@ -62,7 +65,11 @@ public class ChatEventActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayChatMessage(recyclerView);
+    }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
@@ -122,7 +129,8 @@ public class ChatEventActivity extends AppCompatActivity {
 
 
     public void displayChatMessage(final RecyclerView recyclerView){
-
+        Intent intent=getIntent();
+        final String event_id = intent.getStringExtra("event_id");
 
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -130,7 +138,11 @@ public class ChatEventActivity extends AppCompatActivity {
                 ArrayList<ChatMessage> list=new ArrayList<>();
                 for(DataSnapshot chatMessage :dataSnapshot.getChildren()){
                     ChatMessage chatMsg = chatMessage.getValue(ChatMessage.class);
-                    list.add(chatMsg);
+                    System.out.println("event number"+ event_id);
+                    if(chatMsg.getEvent_id().equals(event_id)) {
+                        list.add(chatMsg);
+                    }
+
                 }
                 recyclerView.setAdapter(new RecyclerViewAdapter(list,ChatEventActivity.this));
             }

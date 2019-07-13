@@ -6,10 +6,12 @@ public class ChatMessage {
     private String messageText;
     private String messageUser;
     private long messageTime;
+    private String event_id;
 
-    public ChatMessage(String messageText, String messageUser) {
+    public ChatMessage(String messageText, String messageUser, String event_id) {
         this.messageText = messageText;
         this.messageUser = messageUser;
+        this.event_id=event_id;
         this.messageTime = new Date().getTime();
     }
 
@@ -38,5 +40,13 @@ public class ChatMessage {
 
     public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public String getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(String event_id) {
+        this.event_id = event_id;
     }
 }

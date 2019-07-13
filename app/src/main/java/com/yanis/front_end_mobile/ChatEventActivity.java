@@ -1,9 +1,7 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,12 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,10 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import android.text.format.DateFormat;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChatEventActivity extends AppCompatActivity {
 
@@ -104,7 +96,7 @@ public class ChatEventActivity extends AppCompatActivity {
         @Override
         public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             LayoutInflater inflater=LayoutInflater.from(mCtx);
-            View view=inflater.inflate(R.layout.list_item,null);
+            View view=inflater.inflate(R.layout.card_view_chat_message,null);
             return new RecyclerViewHolder(view);
 
         }

@@ -27,8 +27,6 @@ import java.util.ArrayList;
 
 public class ChatEventActivity extends AppCompatActivity {
 
-    private static int SIGN_IN_REQUEST_CODE = 1;
-    RelativeLayout chat_activity;
     FloatingActionButton fab;
     RecyclerView recyclerView;
     DatabaseReference firebaseDatabase;

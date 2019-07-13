@@ -28,8 +28,11 @@ public class DetailsEventActivity extends AppCompatActivity {
 
 
     public void onChatPressed(View view){
-        Intent i =new Intent(this,ChatEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,ChatEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 
 

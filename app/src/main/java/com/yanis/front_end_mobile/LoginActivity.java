@@ -1,6 +1,7 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
@@ -31,11 +36,15 @@ import java.net.URL;
 public class LoginActivity extends AppCompatActivity {
     public EditText editTextEmailLogin;
     public EditText editTextPasswordLogin;
+    public FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        firebaseAuth=FirebaseAuth.getInstance();
+
         editTextEmailLogin=(EditText)findViewById(R.id.editTextEmailLogin);
         editTextPasswordLogin=(EditText)findViewById(R.id.editTextPasswordLogin);
         initViews();
@@ -62,6 +71,20 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(final View view){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        firebaseAuth.signInWithEmailAndPassword(editTextEmailLogin.getText().toString(),editTextPasswordLogin.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if(task.isSuccessful()){
+                            Log.i("success","okkk");
+                        }else{
+                            Log.e("ERROR",task.getException().toString());
+                            Toast.makeText(LoginActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
         String URL = "http://192.168.43.157:3000/sessions?email="+editTextEmailLogin.getText().toString().trim()+"&password="+editTextPasswordLogin.getText().toString().trim();
             JsonObjectRequest objectRequest = new JsonObjectRequest(

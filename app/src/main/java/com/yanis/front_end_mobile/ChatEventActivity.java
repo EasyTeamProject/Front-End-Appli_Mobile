@@ -41,7 +41,7 @@ public class ChatEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_event);
 
         list=new ArrayList<>();
-        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("chat");
 
         recyclerView = (RecyclerView) findViewById(R.id.list_of_message);
         recyclerView.setHasFixedSize(true);
@@ -57,7 +57,7 @@ public class ChatEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText input= (EditText)findViewById(R.id.input);
-                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(input.getText().toString(), "Yanis",event_id));
+                FirebaseDatabase.getInstance().getReference().child("chat").push().setValue(new ChatMessage(input.getText().toString(), "Yanis",event_id));
                 input.setText("");
             }
         });

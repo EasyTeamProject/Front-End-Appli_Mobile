@@ -57,7 +57,7 @@ public class ChatEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText input= (EditText)findViewById(R.id.input);
-                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(input.getText().toString(), FirebaseAuth.getInstance().getCurrentUser().getEmail(),event_id));
+                FirebaseDatabase.getInstance().getReference().push().setValue(new ChatMessage(input.getText().toString(), "Yanis",event_id));
                 input.setText("");
             }
         });

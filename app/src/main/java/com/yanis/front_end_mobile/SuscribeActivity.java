@@ -37,6 +37,17 @@ public class SuscribeActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void onPrivacyPolicyPressed(View view){
+        Intent i =new Intent(this,PrivacyPolicyActivity.class);
+        startActivity(i);
+    }
+
+    public void onTermsPressed(View view){
+        Intent i =new Intent(this,TermsUseActivity.class);
+        startActivity(i);
+    }
+
+
     public void subscribe(final View view){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 

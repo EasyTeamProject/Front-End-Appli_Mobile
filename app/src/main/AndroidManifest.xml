@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FullImageActivity"></activity>
+        <activity android:name=".TermsUseActivity"></activity>
+        <activity android:name=".PrivacyPolicyActivity" />
+        <activity android:name=".FullImageActivity" />
         <activity android:name=".PersonelInformationActivity" />
         <activity android:name=".AddSurveyActivity" />
         <activity android:name=".AddExpenseActivity" />

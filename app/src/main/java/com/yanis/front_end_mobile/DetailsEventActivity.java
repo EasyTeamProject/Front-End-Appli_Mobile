@@ -65,7 +65,10 @@ public class DetailsEventActivity extends AppCompatActivity {
 
 
     public void onSurveyPressed(View view){
-        Intent i =new Intent(this,SurveyEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,SurveyEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 }

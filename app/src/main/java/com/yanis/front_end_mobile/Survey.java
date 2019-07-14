@@ -5,14 +5,30 @@ public class Survey {
     String id_event;
     String question;
     String answerOne;
+    long numberAnswerOne;
     String answerTwo;
+    long numberAnswerTwo;
 
-    public Survey(String id, String id_event, String question, String answerOne, String answerTwo) {
+    public Survey(String id_event, String question, String answerOne, long numberAnswerOne, String answerTwo, long numberAnswerTwo) {
+        this.id_event = id_event;
+        this.question = question;
+        this.answerOne = answerOne;
+        this.numberAnswerOne = numberAnswerOne;
+        this.answerTwo = answerTwo;
+        this.numberAnswerTwo = numberAnswerTwo;
+    }
+
+    public Survey() {
+    }
+
+    public Survey(String id, String id_event, String question, String answerOne, long numberAnswerOne, String answerTwo, long numberAnswerTwo) {
         this.id = id;
         this.id_event = id_event;
         this.question = question;
         this.answerOne = answerOne;
+        this.numberAnswerOne = numberAnswerOne;
         this.answerTwo = answerTwo;
+        this.numberAnswerTwo = numberAnswerTwo;
     }
 
     public String getId() {
@@ -47,6 +63,14 @@ public class Survey {
         this.answerOne = answerOne;
     }
 
+    public long getNumberAnswerOne() {
+        return numberAnswerOne;
+    }
+
+    public void setNumberAnswerOne(long numberAnswerOne) {
+        this.numberAnswerOne = numberAnswerOne;
+    }
+
     public String getAnswerTwo() {
         return answerTwo;
     }
@@ -54,32 +78,12 @@ public class Survey {
     public void setAnswerTwo(String answerTwo) {
         this.answerTwo = answerTwo;
     }
-}
 
-
-class Answer{
-
-    String answer;
-    String number_answer;
-
-    public Answer(String answer, String number_answer) {
-        this.answer = answer;
-        this.number_answer = number_answer;
+    public long getNumberAnswerTwo() {
+        return numberAnswerTwo;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public String getNumber_answer() {
-        return number_answer;
-    }
-
-    public void setNumber_answer(String number_answer) {
-        this.number_answer = number_answer;
+    public void setNumberAnswerTwo(long numberAnswerTwo) {
+        this.numberAnswerTwo = numberAnswerTwo;
     }
 }

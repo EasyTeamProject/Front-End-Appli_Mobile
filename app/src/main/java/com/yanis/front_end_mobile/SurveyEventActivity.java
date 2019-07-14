@@ -23,6 +23,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -42,11 +47,14 @@ public class SurveyEventActivity extends AppCompatActivity {
     public TextView textView;
     public PreferenceUtils utils;
     public RecyclerView recyclerView;
+    DatabaseReference firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_event);
+
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("survey");
 
         PreferenceUtils utils = new PreferenceUtils();
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view_survey);
@@ -58,14 +66,18 @@ public class SurveyEventActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getAllSurveys(recyclerView);
+    }
 
     public void onAddSurveyPressed(View view){
-        Intent i =new Intent(this,AddSurveyActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,AddSurveyActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 
 
@@ -120,7 +132,7 @@ public class SurveyEventActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public SurveyEventActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public SurveyEventActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
             LayoutInflater inflater=LayoutInflater.from(mCtx);
             View view=inflater.inflate(R.layout.card_view_survey,null);
             final Button buttonOne = view.findViewById(R.id.buttonOne);
@@ -132,10 +144,13 @@ public class SurveyEventActivity extends AppCompatActivity {
                     try {
                         if (buttonOne.getText().toString().equals("+")) {
                             buttonOne.setText("-");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerOne").setValue(mlist.get(i).getNumberAnswerOne()+1);
                             return;
                         }
                         if (buttonOne.getText().toString().equals("-")) {
                             buttonOne.setText("+");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerOne").setValue(mlist.get(i).getNumberAnswerOne()-1);
+                            return;
                         }
                     }
                     catch (Exception e)
@@ -151,10 +166,13 @@ public class SurveyEventActivity extends AppCompatActivity {
                     try {
                         if (buttonTwo.getText().toString().equals("+")) {
                             buttonTwo.setText("-");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerTwo").setValue(mlist.get(i).getNumberAnswerTwo()+1);
                             return;
                         }
                         if (buttonTwo.getText().toString().equals("-")) {
                             buttonTwo.setText("+");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerTwo").setValue(mlist.get(i).getNumberAnswerTwo()-1);
+                            return;
                         }
                     }
                     catch (Exception e)
@@ -171,9 +189,9 @@ public class SurveyEventActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
             recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());
             recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne());
-            recyclerViewHolder.mTextViewNumberOne.setText("0");
+            recyclerViewHolder.mTextViewNumberOne.setText(Long.toString(mlist.get(i).getNumberAnswerOne()));
             recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo());
-            recyclerViewHolder.mTextViewNumberTwo.setText("0");
+            recyclerViewHolder.mTextViewNumberTwo.setText(Long.toString(mlist.get(i).getNumberAnswerTwo()));
 
         }
 
@@ -197,63 +215,30 @@ public class SurveyEventActivity extends AppCompatActivity {
     private void getAllSurveys(final RecyclerView recyclerView) {
 
         Intent i=getIntent();
-        String event_id = i.getStringExtra("event_id");
-        //TODO change the event
-        final String URL = "http://192.168.43.157:3000/events/13/survey";
-        final String Token = utils.getToken(this);
+        final String event_id = i.getStringExtra("event_id");
 
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                URL,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        System.out.println(response.toString());
-                        try {
-                            List<Survey> list=new ArrayList<>();
-                            for (int i=0; i < response.length(); i++){
-                                JSONObject jsonObject=response.getJSONObject(i);
-
-                                JSONArray questions= (JSONArray)jsonObject.get("questions");
-
-                                JSONObject firstObject = questions.getJSONObject(0);
-
-                                JSONArray responses= (JSONArray)firstObject.get("responses");
-
-                                JSONObject answerOne = responses.getJSONObject(0);
-                                JSONObject answerTwo = responses.getJSONObject(1);
-
-                                list.add(new Survey(jsonObject.getString("id"),
-                                        jsonObject.getString("event_id"),
-                                        firstObject.getString("question"),
-                                        answerOne.getString("text"),
-                                        answerTwo.getString("text")));
-                            }
-                            recyclerView.setAdapter(new RecyclerViewAdapter(list,SurveyEventActivity.this));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.i("info", "onResponse: OOOK dans l'exception");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Log.i("info", "onResponse: KOOO ");
-                    }
-                }) {
+        firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "bearer");
-                headers.put("Content-Type", "application/json");
-                headers.put("JWT",Token);
-                return headers;
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Survey> list=new ArrayList<>();
+                for(DataSnapshot s :dataSnapshot.getChildren()){
+
+                    Survey survey = s.getValue(Survey.class);
+
+                    if(survey.getId_event().equals(event_id)){
+                        list.add(new Survey(s.getKey(),survey.getId_event(),survey.getQuestion(),survey.answerOne,survey.getNumberAnswerOne(),survey.getAnswerTwo(),survey.getNumberAnswerTwo()));
+                    }
+
+                }
+                recyclerView.setAdapter(new SurveyEventActivity.RecyclerViewAdapter(list,SurveyEventActivity.this));
             }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 }

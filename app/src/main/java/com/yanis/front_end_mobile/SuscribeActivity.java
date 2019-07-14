@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ public class SuscribeActivity extends AppCompatActivity {
     public EditText editTextEmail;
     public EditText editTextPassword;
     public EditText editTextConfirmPassword;
+    public CheckBox checkBoxOne;
+    public CheckBox checkBoxTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class SuscribeActivity extends AppCompatActivity {
         editTextEmail=(EditText)findViewById(R.id.editTextEmail);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         editTextConfirmPassword=(EditText)findViewById(R.id.editTextConfirmPassword);
+
+        checkBoxOne=(CheckBox)findViewById(R.id.checkBox);
+        checkBoxTwo=(CheckBox)findViewById(R.id.checkBox2);
     }
     public void onBackToLoginPressed(){
         Intent i =new Intent(this,LoginActivity.class);
@@ -49,32 +55,37 @@ public class SuscribeActivity extends AppCompatActivity {
 
 
     public void subscribe(final View view){
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        if(checkBoxTwo.isChecked() && checkBoxOne.isChecked()) {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        String URL = "http://192.168.43.157:3000/users?email="+editTextEmail.getText().toString()+"&password="+editTextPassword.getText().toString();
-        if(editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
-            JsonObjectRequest objectRequest = new JsonObjectRequest(
-                    Request.Method.POST,
-                    URL,
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Toast.makeText(getApplicationContext(), "Account created successfuly", Toast.LENGTH_SHORT).show();
-                            onBackToLoginPressed();
+            String URL = "http://192.168.43.157:3000/users?email=" + editTextEmail.getText().toString() + "&password=" + editTextPassword.getText().toString();
+            if (editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
+                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                        Request.Method.POST,
+                        URL,
+                        null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Toast.makeText(getApplicationContext(), "Account created successfuly", Toast.LENGTH_SHORT).show();
+                                onBackToLoginPressed();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Error to create an account", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "Error to create an account", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            );
+                );
 
-            requestQueue.add(objectRequest);
-        }else {
-            Toast.makeText(getApplicationContext(), "The password and the confirm password are not similar", Toast.LENGTH_SHORT).show();
+                requestQueue.add(objectRequest);
+            } else {
+                Toast.makeText(getApplicationContext(), "The password and the confirm password are not similar", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "You have to accept the terms of use and the privacy policy", Toast.LENGTH_SHORT).show();
+
         }
     }
 }

@@ -132,7 +132,7 @@ public class SurveyEventActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public SurveyEventActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public SurveyEventActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
             LayoutInflater inflater=LayoutInflater.from(mCtx);
             View view=inflater.inflate(R.layout.card_view_survey,null);
             final Button buttonOne = view.findViewById(R.id.buttonOne);
@@ -144,10 +144,13 @@ public class SurveyEventActivity extends AppCompatActivity {
                     try {
                         if (buttonOne.getText().toString().equals("+")) {
                             buttonOne.setText("-");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerOne").setValue(mlist.get(i).getNumberAnswerOne()+1);
                             return;
                         }
                         if (buttonOne.getText().toString().equals("-")) {
                             buttonOne.setText("+");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerOne").setValue(mlist.get(i).getNumberAnswerOne()-1);
+                            return;
                         }
                     }
                     catch (Exception e)
@@ -163,10 +166,13 @@ public class SurveyEventActivity extends AppCompatActivity {
                     try {
                         if (buttonTwo.getText().toString().equals("+")) {
                             buttonTwo.setText("-");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerTwo").setValue(mlist.get(i).getNumberAnswerTwo()+1);
                             return;
                         }
                         if (buttonTwo.getText().toString().equals("-")) {
                             buttonTwo.setText("+");
+                            FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerTwo").setValue(mlist.get(i).getNumberAnswerTwo()-1);
+                            return;
                         }
                     }
                     catch (Exception e)
@@ -183,9 +189,9 @@ public class SurveyEventActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
             recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());
             recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne());
-            recyclerViewHolder.mTextViewNumberOne.setText("0");
+            recyclerViewHolder.mTextViewNumberOne.setText(Long.toString(mlist.get(i).getNumberAnswerOne()));
             recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo());
-            recyclerViewHolder.mTextViewNumberTwo.setText("0");
+            recyclerViewHolder.mTextViewNumberTwo.setText(Long.toString(mlist.get(i).getNumberAnswerTwo()));
 
         }
 
@@ -218,8 +224,9 @@ public class SurveyEventActivity extends AppCompatActivity {
                 for(DataSnapshot s :dataSnapshot.getChildren()){
 
                     Survey survey = s.getValue(Survey.class);
+
                     if(survey.getId_event().equals(event_id)){
-                        list.add(survey);
+                        list.add(new Survey(s.getKey(),survey.getId_event(),survey.getQuestion(),survey.answerOne,survey.getNumberAnswerOne(),survey.getAnswerTwo(),survey.getNumberAnswerTwo()));
                     }
 
                 }

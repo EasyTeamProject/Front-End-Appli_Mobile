@@ -35,7 +35,7 @@ public class AddSurveyActivity extends AppCompatActivity {
         String event_id = i.getStringExtra("event_id");
         System.out.println(event_id);
 
-        FirebaseDatabase.getInstance().getReference().child("survey").push().setValue(new Survey(event_id,questionSurvey.getText().toString(),answerOneSurvey.getText().toString(),"0",answerTwoSurvey.getText().toString(),"0"));
+        FirebaseDatabase.getInstance().getReference().child("survey").push().setValue(new Survey(event_id,questionSurvey.getText().toString(),answerOneSurvey.getText().toString(),0,answerTwoSurvey.getText().toString(),0));
 
         Intent intent =new Intent(this,SurveyEventActivity.class);
         startActivity(intent);

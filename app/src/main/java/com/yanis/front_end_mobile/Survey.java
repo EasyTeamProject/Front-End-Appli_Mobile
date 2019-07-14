@@ -1,14 +1,15 @@
 package com.yanis.front_end_mobile;
 
 public class Survey {
+    String id;
     String id_event;
     String question;
     String answerOne;
-    String numberAnswerOne;
+    long numberAnswerOne;
     String answerTwo;
-    String numberAnswerTwo;
+    long numberAnswerTwo;
 
-    public Survey(String id_event, String question, String answerOne, String numberAnswerOne, String answerTwo, String numberAnswerTwo) {
+    public Survey(String id_event, String question, String answerOne, long numberAnswerOne, String answerTwo, long numberAnswerTwo) {
         this.id_event = id_event;
         this.question = question;
         this.answerOne = answerOne;
@@ -18,6 +19,24 @@ public class Survey {
     }
 
     public Survey() {
+    }
+
+    public Survey(String id, String id_event, String question, String answerOne, long numberAnswerOne, String answerTwo, long numberAnswerTwo) {
+        this.id = id;
+        this.id_event = id_event;
+        this.question = question;
+        this.answerOne = answerOne;
+        this.numberAnswerOne = numberAnswerOne;
+        this.answerTwo = answerTwo;
+        this.numberAnswerTwo = numberAnswerTwo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getId_event() {
@@ -44,11 +63,11 @@ public class Survey {
         this.answerOne = answerOne;
     }
 
-    public String getNumberAnswerOne() {
+    public long getNumberAnswerOne() {
         return numberAnswerOne;
     }
 
-    public void setNumberAnswerOne(String numberAnswerOne) {
+    public void setNumberAnswerOne(long numberAnswerOne) {
         this.numberAnswerOne = numberAnswerOne;
     }
 
@@ -60,11 +79,11 @@ public class Survey {
         this.answerTwo = answerTwo;
     }
 
-    public String getNumberAnswerTwo() {
+    public long getNumberAnswerTwo() {
         return numberAnswerTwo;
     }
 
-    public void setNumberAnswerTwo(String numberAnswerTwo) {
+    public void setNumberAnswerTwo(long numberAnswerTwo) {
         this.numberAnswerTwo = numberAnswerTwo;
     }
 }

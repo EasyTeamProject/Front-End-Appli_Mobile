@@ -108,8 +108,9 @@ public class FriendsActivity extends AppCompatActivity {
 
     private void getAllFriends(final RecyclerView recyclerView) {
 
-        final String URL = "http://192.168.43.157:3000/events";
+        final String URL = "http://192.168.43.157:3000/friends";
         final String Token = utils.getToken(this);
+
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -122,7 +123,7 @@ public class FriendsActivity extends AppCompatActivity {
                             List<String> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(jsonObject.getString("name"));
+                                list.add(jsonObject.getString("email"));
                             }
                             recyclerView.setAdapter(new RecyclerViewAdapter(list,FriendsActivity.this));
                         } catch (JSONException e) {
@@ -135,7 +136,7 @@ public class FriendsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        Log.i("info", "onResponse: KOOO ");
+                        Log.e("info", "onResponse: KOOO ");
                     }
                 }) {
             @Override

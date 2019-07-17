@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FriendsActivity">
+    tools:context=".ListOfUsersToAddActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -19,38 +19,18 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="70dp"
-        android:text="My friends"
+        android:text="Users"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_view_friends"
+        android:id="@+id/recycle_view_friends_to_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:onClick="onUserPressed"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp" />
-    <Button
-        android:id="@+id/buttonAddPicture"
-        android:layout_width="60dp"
-        android:layout_height="55dp"
-        android:layout_alignStart="@+id/recycle_view_friends"
-        android:layout_alignEnd="@+id/recycle_view_friends"
-        android:layout_alignBottom="@+id/recycle_view_friends"
-        android:layout_marginStart="332dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="42dp"
-        android:background="@drawable/selected_tab_background"
-        android:shadowRadius="20"
-        android:text="+"
-        android:textColor="#00BCD4"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </RelativeLayout>

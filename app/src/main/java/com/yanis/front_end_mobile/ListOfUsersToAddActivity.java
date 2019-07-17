@@ -1,8 +1,6 @@
 package com.yanis.front_end_mobile;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,31 +29,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FriendsActivity extends AppCompatActivity {
+public class ListOfUsersToAddActivity extends AppCompatActivity {
+
     public TextView textView;
     public PreferenceUtils utils;
     public RecyclerView recyclerView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
-        PreferenceUtils utils = new PreferenceUtils();
+        setContentView(R.layout.activity_list_of_users_to_add);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycle_view_friends);
+        recyclerView = (RecyclerView) findViewById(R.id.recycle_view_friends_to_add);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        getAllFriends(recyclerView);
+        getAllUsers(recyclerView);
     }
 
 
 
 
-
-    public void onUserPressed(View view){
-        Intent intent = new Intent(this,ListOfUsersToAddActivity.class);
-        startActivity(intent);
-    }
 
 
     private class RecyclerViewHolder extends RecyclerView.ViewHolder{
@@ -65,20 +59,14 @@ public class FriendsActivity extends AppCompatActivity {
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-            mCardView = itemView.findViewById(R.id.card_container_friend);
-            mTextView = itemView.findViewById(R.id.itemNameFriend);
+            mCardView = itemView.findViewById(R.id.card_container_friend_to_add);
+            mTextView = itemView.findViewById(R.id.itemNameFriendToAdd);
         }
     }
 
 
 
-
-
-
-
-
-
-    public class RecyclerViewAdapter extends RecyclerView.Adapter<FriendsActivity.RecyclerViewHolder>{
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<ListOfUsersToAddActivity.RecyclerViewHolder>{
         private Context mCtx;
         private List<String> mlist;
         public RecyclerViewAdapter(List<String> list,Context Ctx) {
@@ -88,14 +76,14 @@ public class FriendsActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public ListOfUsersToAddActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             LayoutInflater inflater=LayoutInflater.from(mCtx);
             View view=inflater.inflate(R.layout.card_view_friends,null);
-            return new RecyclerViewHolder(view);
+            return new ListOfUsersToAddActivity.RecyclerViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int i) {
+        public void onBindViewHolder(@NonNull ListOfUsersToAddActivity.RecyclerViewHolder recyclerViewHolder, int i) {
             recyclerViewHolder.mTextView.setText(mlist.get(i));
         }
 
@@ -106,13 +94,9 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
 
+    private void getAllUsers(final RecyclerView recyclerView) {
 
-
-
-
-    private void getAllFriends(final RecyclerView recyclerView) {
-
-        final String URL = "http://192.168.43.157:3000/friends";
+        final String URL = "http://192.168.43.157:3000/users";
         final String Token = utils.getToken(this);
 
 
@@ -129,7 +113,7 @@ public class FriendsActivity extends AppCompatActivity {
                                 JSONObject jsonObject=response.getJSONObject(i);
                                 list.add(jsonObject.getString("email"));
                             }
-                            recyclerView.setAdapter(new RecyclerViewAdapter(list,FriendsActivity.this));
+                            recyclerView.setAdapter(new ListOfUsersToAddActivity.RecyclerViewAdapter(list,ListOfUsersToAddActivity.this));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.i("info", "onResponse: OOOK dans l'exception");
@@ -155,4 +139,5 @@ public class FriendsActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
     }
+
 }

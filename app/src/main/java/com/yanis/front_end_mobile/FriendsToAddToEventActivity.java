@@ -89,7 +89,7 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
             recyclerViewHolder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    inviteUser(mlist.get(i).getId());
+                    inviteFriend(mlist.get(i).getId());
                 }
             });
         }
@@ -139,7 +139,7 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "bearer");
+                headers.put("Accept", "application/json");
                 headers.put("Content-Type", "application/json");
                 headers.put("JWT",Token);
                 return headers;
@@ -156,11 +156,11 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
 
 
 
-    public void inviteUser(Integer id_user) {
+    public void inviteFriend(Integer id_user) {
 
-        final String URL = "http://192.168.43.157:3000/events/1/invitations/?user_id="+id_user;
+        final String URL = "http://192.168.43.157:3000/events/19/invitations/?user_id="+id_user;
         final String Token = utils.getToken(this);
-
+        Log.i("Token", "inviteFriend: "+Token);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
@@ -177,14 +177,14 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.e("error", "onErrorResponse: "+error );
                         Toast.makeText(FriendsToAddToEventActivity.this, "User not added successfuly", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "bearer");
-                headers.put("Content-Type", "application/json");
+                headers.put("Content-Type", "application/json; charset=utf-8");
                 headers.put("JWT",Token);
                 return headers;
             }

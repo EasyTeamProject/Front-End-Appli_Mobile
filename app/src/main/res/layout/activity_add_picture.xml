@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPictureActivity">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo_without_name" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Add a picture"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"/>
+
+    <ImageView
+        android:id="@+id/image_to_add"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        android:layout_marginTop="150dp" />
+
+    <Button
+        android:id="@+id/button_choose_picture"
+        android:layout_width="180dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/image_to_add"
+        android:layout_alignStart="@+id/image_to_add"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginBottom="89dp"
+        android:background="@drawable/selected_tab_background"
+        android:onClick="onChooseClick"
+        android:shadowRadius="20"
+        android:text="Choose"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_save_picture"
+        android:layout_width="180dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/image_to_add"
+        android:layout_alignEnd="@+id/image_to_add"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="91dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="89dp"
+        android:background="@drawable/selected_tab_background"
+        android:onClick="onSaveClick"
+        android:shadowRadius="20"
+        android:text="Save"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</RelativeLayout>

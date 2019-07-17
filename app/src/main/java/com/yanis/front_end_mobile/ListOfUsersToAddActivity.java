@@ -1,6 +1,7 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,13 +12,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -56,11 +60,14 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
 
         private CardView mCardView;
         private TextView mTextView;
+        public Button button;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
             mCardView = itemView.findViewById(R.id.card_container_friend_to_add);
             mTextView = itemView.findViewById(R.id.itemNameFriendToAdd);
+            button = itemView.findViewById(R.id.buttonAddFriend);
+
         }
     }
 
@@ -68,8 +75,8 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<ListOfUsersToAddActivity.RecyclerViewHolder>{
         private Context mCtx;
-        private List<String> mlist;
-        public RecyclerViewAdapter(List<String> list,Context Ctx) {
+        private List<User> mlist;
+        public RecyclerViewAdapter(List<User> list,Context Ctx) {
             this.mlist=list;
             this.mCtx=Ctx;
         }
@@ -83,8 +90,14 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ListOfUsersToAddActivity.RecyclerViewHolder recyclerViewHolder, int i) {
-            recyclerViewHolder.mTextView.setText(mlist.get(i));
+        public void onBindViewHolder(@NonNull ListOfUsersToAddActivity.RecyclerViewHolder recyclerViewHolder, final int i) {
+            recyclerViewHolder.mTextView.setText(mlist.get(i).getName());
+            recyclerViewHolder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    inviteUser(mlist.get(i).getId());
+                }
+            });
         }
 
         @Override
@@ -92,6 +105,11 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
             return mlist.size();
         }
     }
+
+
+
+
+
 
 
     private void getAllUsers(final RecyclerView recyclerView) {
@@ -108,10 +126,10 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            List<String> list=new ArrayList<>();
+                            List<User> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(jsonObject.getString("email"));
+                                list.add(new User(Integer.parseInt(jsonObject.getString("id")),jsonObject.getString("email")));
                             }
                             recyclerView.setAdapter(new ListOfUsersToAddActivity.RecyclerViewAdapter(list,ListOfUsersToAddActivity.this));
                         } catch (JSONException e) {
@@ -125,6 +143,50 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                         Log.e("info", "onResponse: KOOO ");
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "bearer");
+                headers.put("Content-Type", "application/json");
+                headers.put("JWT",Token);
+                return headers;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
+    }
+
+
+
+
+
+
+
+
+    public void inviteUser(Integer id_user) {
+
+        final String URL = "http://192.168.43.157:3000/friends?friend_id="+id_user;
+        final String Token = utils.getToken(this);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response){
+                        Toast.makeText(ListOfUsersToAddActivity.this, "User added successfuly", Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(ListOfUsersToAddActivity.this,FriendsActivity.class);
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ListOfUsersToAddActivity.this, "User not added successfuly", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

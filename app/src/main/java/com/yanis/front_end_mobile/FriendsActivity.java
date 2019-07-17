@@ -2,6 +2,7 @@ package com.yanis.front_end_mobile;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +52,10 @@ public class FriendsActivity extends AppCompatActivity {
 
 
 
-
+    public void onUserPressed(View view){
+        Intent intent = new Intent(this,ListOfUsersToAddActivity.class);
+        startActivity(intent);
+    }
 
 
     private class RecyclerViewHolder extends RecyclerView.ViewHolder{

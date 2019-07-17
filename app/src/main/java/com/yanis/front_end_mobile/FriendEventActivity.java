@@ -50,6 +50,22 @@ public class FriendEventActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
+    public void onAddFriendsPressed(View view){
+        Intent intent = new Intent(this,FriendsToAddToEventActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
+
+
+
+
     private class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
         private CardView mCardView;
@@ -61,6 +77,7 @@ public class FriendEventActivity extends AppCompatActivity {
             mTextView = itemView.findViewById(R.id.itemNameFriend);
         }
     }
+
 
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<FriendEventActivity.RecyclerViewHolder>{
@@ -89,6 +106,9 @@ public class FriendEventActivity extends AppCompatActivity {
             return mlist.size();
         }
     }
+
+
+
 
 
     private void getAllFriends(final RecyclerView recyclerView) {

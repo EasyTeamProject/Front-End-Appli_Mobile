@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ListOfUsersToAddActivity"></activity>
+        <activity android:name=".FriendsToAddToEventActivity"></activity>
+        <activity android:name=".ListOfUsersToAddActivity" />
         <activity android:name=".AddPictureActivity" />
         <activity android:name=".FullImageActivity" />
         <activity android:name=".TermsUseActivity" />

@@ -78,7 +78,7 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
         @Override
         public ListOfUsersToAddActivity.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             LayoutInflater inflater=LayoutInflater.from(mCtx);
-            View view=inflater.inflate(R.layout.card_view_friends,null);
+            View view=inflater.inflate(R.layout.card_view_friends_to_add,null);
             return new ListOfUsersToAddActivity.RecyclerViewHolder(view);
         }
 

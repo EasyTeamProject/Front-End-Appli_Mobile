@@ -3,8 +3,10 @@ package com.yanis.front_end_mobile;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.internal.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +27,15 @@ import java.io.File;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddPictureActivity extends AppCompatActivity {
 
@@ -51,7 +63,7 @@ public class AddPictureActivity extends AppCompatActivity {
     }
 
     public void onSaveClick(View view){
-        addPicture();
+        uploadNewProfilePicture(imageUri);
         Intent intent = new Intent(this,PictureEventActivity.class);
         startActivity(intent);
     }
@@ -73,7 +85,54 @@ public class AddPictureActivity extends AppCompatActivity {
 
 
 
-    private void addPicture() {
+
+
+
+    private void uploadNewProfilePicture(Uri profilePicture) {
+
+
+        File file = new File(FileUtils.getPath(this, profilePicture));
+
+
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse(this.getContentResolver().getType(profilePicture)),
+                        file
+                );
+
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.43.157:3000/").addConverterFactory(GsonConverterFactory.create()).build();
+
+        UserService service = retrofit.create(UserService.class);
+
+
+        Call<ResponseBody> call = service.setProfilePicture(utils.getToken(this), "1", body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(AddPictureActivity.this, "Picture added successfuly", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddPictureActivity.this, "Picture not added successfuly", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("error", "\nCause: " + t.getCause() + "\nMessage: " + t.getMessage() + "\nLocalized Message: " + t.getLocalizedMessage());
+
+            }
+        });
+    }
+
+
+
+
+  /*  private void addPicture() {
 
         final String URL = "http://192.168.43.157:3000/events/5/medias";
         final String Token = utils.getToken(this);
@@ -115,5 +174,5 @@ public class AddPictureActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
 
-    }
+    }*/
 }

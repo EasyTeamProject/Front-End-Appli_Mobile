@@ -13,5 +13,5 @@ public interface UserService {
 
     @Multipart
     @POST("events/{eventId}/medias")
-    Call<ResponseBody> setProfilePicture(@Header("Authorization") String token, @Path("eventId") String id, @Part MultipartBody.Part image);
+    Call<ResponseBody> setProfilePicture(@Header("JWT") String token, @Path("eventId") String id, @Part MultipartBody.Part image);
 }

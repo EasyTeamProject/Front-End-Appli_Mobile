@@ -155,7 +155,7 @@ public class PictureEventActivity extends AppCompatActivity {
 
     public void getAllPictures(final RecyclerView recyclerView) {
 
-        final String URL = "http://192.168.43.157:3000/events/5/medias";
+        final String URL = "http://192.168.43.157:3000/events/1/medias";
         final String Token = utils.getToken(this);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(

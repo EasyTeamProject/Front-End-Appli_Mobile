@@ -104,8 +104,7 @@ public class AddPictureActivity extends AppCompatActivity {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.43.157:3000/").addConverterFactory(GsonConverterFactory.create()).build();
-
+        Retrofit retrofit = NetworkClient.getRetrofitClient(this);
         UserService service = retrofit.create(UserService.class);
 
 
@@ -117,6 +116,7 @@ public class AddPictureActivity extends AppCompatActivity {
                     Toast.makeText(AddPictureActivity.this, "Picture added successfuly", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(AddPictureActivity.this, "Picture not added successfuly", Toast.LENGTH_SHORT).show();
+                    Log.e("Error", "onResponse: "+ response.toString());
 
                 }
             }
@@ -129,50 +129,4 @@ public class AddPictureActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-  /*  private void addPicture() {
-
-        final String URL = "http://192.168.43.157:3000/events/5/medias";
-        final String Token = utils.getToken(this);
-
-        JSONObject image = new JSONObject();
-        try {
-            image.put("image",new File(imageUri.getPath()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                URL,
-                image,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(AddPictureActivity.this, "Picture added successfuly", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(AddPictureActivity.this, "Picture not added successfuly", Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "bearer");
-                headers.put("Content-Type", "application/json");
-                headers.put("JWT",Token);
-                return headers;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
-
-    }*/
 }

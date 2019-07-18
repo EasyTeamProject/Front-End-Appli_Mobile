@@ -2,11 +2,11 @@ package com.yanis.front_end_mobile;
 
 public class Notification {
     String event_name;
-    String user_id;
+    String user_email;
 
-    public Notification(String event_name, String user_id) {
+    public Notification(String event_name, String user_email) {
         this.event_name = event_name;
-        this.user_id = user_id;
+        this.user_email = user_email;
     }
 
     public Notification() {
@@ -20,11 +20,11 @@ public class Notification {
         this.event_name = event_name;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 }

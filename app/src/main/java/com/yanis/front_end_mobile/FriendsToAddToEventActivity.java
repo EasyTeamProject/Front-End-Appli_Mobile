@@ -100,7 +100,7 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     inviteFriend(mlist.get(i).getId());
-                    FirebaseDatabase.getInstance().getReference().child("notification").push().setValue(new Notification(event_name,mlist.get(i).getId().toString()));
+                    FirebaseDatabase.getInstance().getReference().child("notification").push().setValue(new Notification(event_name,mlist.get(i).getName()));
                     sendNotification(mlist.get(i).getName());
                 }
             });

@@ -122,10 +122,10 @@ public class SurveyEventActivity extends AppCompatActivity {
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         private Context mCtx;
 
-        private List<Survey> mlist;
+        private ArrayList<Survey> mlist;
 
 
-        public RecyclerViewAdapter(List<Survey> list,Context context) {
+        public RecyclerViewAdapter(ArrayList<Survey> list,Context context) {
             this.mlist=list;
             this.mCtx=context;
         }

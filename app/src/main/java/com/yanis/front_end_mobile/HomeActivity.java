@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import com.onesignal.OneSignal;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -28,6 +29,13 @@ public class HomeActivity extends AppCompatActivity {
 
         mMainFrame=(FrameLayout)findViewById(R.id.main_frame);
         mMainNav=(BottomNavigationView)findViewById(R.id.main_nav);
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        OneSignal.sendTag("User_id",PreferenceUtils.getEmail(this));
 
         homeFragment= new HomeFragment();
         addEventFragment = new AddEventFragment();

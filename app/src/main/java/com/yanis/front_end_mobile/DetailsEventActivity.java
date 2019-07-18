@@ -58,8 +58,10 @@ public class DetailsEventActivity extends AppCompatActivity {
 
         Intent intent=new Intent(this,FriendEventActivity.class);
         Intent i=getIntent();
+        String event_name = i.getStringExtra("iName");
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+        intent.putExtra("event_name",event_name);
         this.startActivity(intent);
     }
 

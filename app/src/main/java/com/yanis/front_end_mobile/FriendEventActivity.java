@@ -56,6 +56,9 @@ public class FriendEventActivity extends AppCompatActivity {
 
     public void onAddFriendsPressed(View view){
         Intent intent = new Intent(this,FriendsToAddToEventActivity.class);
+        Intent i=getIntent();
+        String event_name = i.getStringExtra("event_name");
+        intent.putExtra("event_name",event_name);
         startActivity(intent);
     }
 

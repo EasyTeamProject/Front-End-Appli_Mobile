@@ -111,7 +111,7 @@
             android:id="@+id/buttonAddEvent"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/selected_tab_background"
             android:shadowRadius="20"
             android:text="Add"

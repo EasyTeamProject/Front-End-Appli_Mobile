@@ -9,6 +9,9 @@ public class Notification {
         this.user_id = user_id;
     }
 
+    public Notification() {
+    }
+
     public String getEvent_name() {
         return event_name;
     }

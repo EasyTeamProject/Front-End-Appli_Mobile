@@ -153,7 +153,7 @@ public class NotificationFragment extends Fragment {
 
                     Notification notification = s.getValue(Notification.class);
 
-                    list.add(new Notification(notification.getUser_id(),notification.getEvent_name()));
+                    list.add(new Notification(notification.getEvent_name(),notification.getUser_id()));
 
                 }
                 recyclerView.setAdapter(new NotificationFragment.RecyclerViewAdapter(list));

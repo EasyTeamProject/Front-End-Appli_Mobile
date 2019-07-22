@@ -31,6 +31,8 @@ public class SettingEventActivity extends AppCompatActivity {
 
     public EditText editTextName;
     public EditText editTextDate;
+    public EditText editTextPlace;
+    public EditText editTextInformation;
     public PreferenceUtils utils;
 
     @Override
@@ -40,6 +42,8 @@ public class SettingEventActivity extends AppCompatActivity {
 
         editTextName= (EditText)findViewById(R.id.editTextNameEventDetail);
         editTextDate= (EditText)findViewById(R.id.editTextDateEventDetail);
+        editTextPlace= (EditText)findViewById(R.id.editTextPlaceEventDetail);
+        editTextInformation= (EditText)findViewById(R.id.editTextSubjectEventDetail);
 
         getOneEvent();
 
@@ -50,9 +54,7 @@ public class SettingEventActivity extends AppCompatActivity {
 
 
     public void onEditEventPressed(View view) {
-        Intent i = new Intent(this, DetailsEventActivity.class);
         EditEvent();
-        startActivity(i);
     }
 
 
@@ -61,14 +63,18 @@ public class SettingEventActivity extends AppCompatActivity {
 
 
     private void EditEvent() {
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
 
-        final String URL = "http://192.168.43.157:3000/events/5";
+        final String URL = "http://192.168.43.157:3000/events/"+event_id;
         final String Token = utils.getToken(this);
 
         JSONObject Event = new JSONObject();
         try {
             Event.put("name",editTextName.getText().toString().trim());
             Event.put("date",editTextDate.getText().toString().trim());
+            Event.put("subject",editTextPlace.getText().toString().trim());
+            Event.put("information",editTextInformation.getText().toString().trim());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -114,8 +120,10 @@ public class SettingEventActivity extends AppCompatActivity {
 
 
     private void getOneEvent() {
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
 
-        final String URL = "http://192.168.43.157:3000/events/5";
+        final String URL = "http://192.168.43.157:3000/events/"+event_id;
         final String Token = utils.getToken(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -128,15 +136,21 @@ public class SettingEventActivity extends AppCompatActivity {
 
                         String name = null;
                         String Date = null;
+                        String Place = null;
+                        String Information = null;
                         try {
                             name = response.getString("name");
                             Date = response.getString("date");
+                            Place = response.getString("subject");
+                            Information = response.getString("information");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                         editTextName.setText(name);
                         editTextDate.setText(Date.substring(0,10));
+                        editTextPlace.setText(Place);
+                        editTextInformation.setText(Information);
                     }
                 },
                 new Response.ErrorListener() {

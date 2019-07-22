@@ -1,6 +1,8 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -52,8 +54,17 @@ public class DetailsEventActivity extends AppCompatActivity {
 
 
     public void onCashPressed(View view){
-        Intent i =new Intent(this,CashEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,CashEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
+        startActivity(intent);
     }
 
 

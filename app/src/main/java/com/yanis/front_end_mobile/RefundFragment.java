@@ -168,7 +168,11 @@ public class RefundFragment extends Fragment {
 
     private void getAllRefund(final RecyclerView recyclerView) {
 
-        final String URL = "http://192.168.43.157:3000/events/5/transactions";
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(context);
+        String event_id= m.getString("event_id", "");
+        Log.e("event", "getAllFriends: "+event_id );
+
+        final String URL = "http://192.168.43.157:3000/events/"+event_id+"/transactions";
         final String Token = utils.getToken(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(

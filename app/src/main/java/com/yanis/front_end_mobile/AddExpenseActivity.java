@@ -89,7 +89,8 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
 
     public void onAddPressed(View view){
         Intent i =new Intent(this,CashEventActivity.class);
-        addRefund();
+        addExpense();
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 
@@ -108,9 +109,11 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
 
 
 
-    private void addRefund() {
+    private void addExpense() {
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
 
-        final String URL = "http://192.168.43.157:3000/events/5/transactions?from_id=15";
+        final String URL = "http://192.168.43.157:3000/events/"+event_id+"/transactions";
         final String Token = utils.getToken(this);
 
         JSONObject refund = new JSONObject();
@@ -128,14 +131,14 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(AddExpenseActivity.this, "Refund added successfuly", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddExpenseActivity.this, "Expense added successfuly", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        Toast.makeText(AddExpenseActivity.this, "Refund not added successfuly", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddExpenseActivity.this, "Expense not added successfuly", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

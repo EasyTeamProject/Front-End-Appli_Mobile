@@ -2,6 +2,8 @@ package com.yanis.front_end_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -115,10 +117,10 @@ public class FriendEventActivity extends AppCompatActivity {
 
 
     private void getAllFriends(final RecyclerView recyclerView) {
-        Intent intent=getIntent();
-        String event_id = intent.getStringExtra("event_id");
-        Log.i("eventID", "getAllFriends: " +  event_id);
-        final String URL = "https://api.myjson.com/bins/sejfr";
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(this);
+        String event_id= m.getString("event_id", "");
+
+        final String URL = "http://192.168.43.157:3000/events/"+event_id;
         final String Token = utils.getToken(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(

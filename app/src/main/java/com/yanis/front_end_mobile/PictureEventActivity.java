@@ -60,12 +60,11 @@ public class PictureEventActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
     public void onAddPicPressed(View view){
         Intent intent = new Intent(this,AddPictureActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
+        intent.putExtra("event_id",event_id);
         startActivity(intent);
     }
 
@@ -154,8 +153,10 @@ public class PictureEventActivity extends AppCompatActivity {
 
 
     public void getAllPictures(final RecyclerView recyclerView) {
+        Intent intent=getIntent();
+        final String event_id = intent.getStringExtra("event_id");
 
-        final String URL = "http://192.168.43.157:3000/events/1/medias";
+        final String URL = "http://192.168.43.157:3000/events/"+event_id+"/medias";
         final String Token = utils.getToken(this);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(

@@ -34,8 +34,11 @@ public class DetailsEventActivity extends AppCompatActivity {
 
 
     public void onInfoPressed(View view){
-        Intent i =new Intent(this, PictureEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this, PictureEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 
 

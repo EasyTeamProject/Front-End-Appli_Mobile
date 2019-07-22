@@ -29,34 +29,25 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/edit_information_event"
+            android:id="@+id/nameProfil"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="150dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Yanis" />
+            android:text="Name" />
 
         <Button
-            android:id="@+id/edit_date_event"
+            android:id="@+id/emailProfil"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorPrimaryDark"
-            android:text="AKLI" />
+            android:text="Email" />
 
-        <Button
-            android:id="@+id/edit_place_event"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="01/01/aaaa" />
 
     </LinearLayout>
 

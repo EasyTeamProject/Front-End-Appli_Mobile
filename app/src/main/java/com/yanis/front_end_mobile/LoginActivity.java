@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void onLogin(String token, long id, String name){
-        Toast.makeText(getApplicationContext(), "Login successfuly", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Welcome "+name, Toast.LENGTH_SHORT).show();
 
         PreferenceUtils.saveEmail(editTextEmailLogin.getText().toString().trim(), this);
         PreferenceUtils.saveToken(token, this);

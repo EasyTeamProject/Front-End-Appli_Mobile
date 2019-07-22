@@ -96,13 +96,13 @@
             app:cardCornerRadius="10dp">
 
             <EditText
-                android:id="@+id/editTextSubject"
+                android:id="@+id/editTextInformation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Subject"
+                android:hint="Information"
                 android:inputType="textMultiLine|textPersonName"
                 android:singleLine="false" />
         </android.support.v7.widget.CardView>

@@ -127,7 +127,7 @@ public class FriendsActivity extends AppCompatActivity {
                             List<String> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(jsonObject.getString("email"));
+                                list.add(jsonObject.getString("name"));
                             }
                             recyclerView.setAdapter(new RecyclerViewAdapter(list,FriendsActivity.this));
                         } catch (JSONException e) {

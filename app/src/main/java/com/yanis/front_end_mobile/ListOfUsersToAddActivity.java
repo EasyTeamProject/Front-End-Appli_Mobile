@@ -180,6 +180,7 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response){
                         Toast.makeText(ListOfUsersToAddActivity.this, "User added successfuly", Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(ListOfUsersToAddActivity.this,FriendsActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 },

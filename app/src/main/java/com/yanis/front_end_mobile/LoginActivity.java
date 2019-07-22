@@ -36,12 +36,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void onLogin(String token){
+    public void onLogin(String token, long id, String name){
         Toast.makeText(getApplicationContext(), "Login successfuly", Toast.LENGTH_SHORT).show();
 
         PreferenceUtils.saveEmail(editTextEmailLogin.getText().toString().trim(), this);
-        PreferenceUtils.savePassword(editTextPasswordLogin.getText().toString().trim(), this);
         PreferenceUtils.saveToken(token, this);
+        PreferenceUtils.saveName(name, this);
+        PreferenceUtils.saveId(id, this);
 
         Intent accountsIntent = new Intent(this, HomeActivity.class);
         emptyInputEditText();
@@ -66,7 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             } catch (JSONException e) {
                                 try {
-                                    onLogin(response.getString("success"));
+                                    JSONObject jsonObject = response.getJSONObject("user");
+                                    onLogin(response.getString("success"),Long.parseLong(jsonObject.getString("id")),jsonObject.getString("name"));
                                 } catch (JSONException e1) {
                                     Toast.makeText(getApplicationContext(), "Error to login : Email or password are incorrect", Toast.LENGTH_SHORT).show();
                                     e1.printStackTrace();

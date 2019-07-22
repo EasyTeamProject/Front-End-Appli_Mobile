@@ -68,46 +68,53 @@ public class SettingEventActivity extends AppCompatActivity {
 
         final String URL = "http://192.168.43.157:3000/events/"+event_id;
         final String Token = utils.getToken(this);
-
-        JSONObject Event = new JSONObject();
-        try {
-            Event.put("name",editTextName.getText().toString().trim());
-            Event.put("date",editTextDate.getText().toString().trim());
-            Event.put("subject",editTextPlace.getText().toString().trim());
-            Event.put("information",editTextInformation.getText().toString().trim());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.PATCH,
-                URL,
-                Event,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(SettingEventActivity.this, "Event edited successfuly", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(SettingEventActivity.this, "Event not edited successfuly", Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "bearer");
-                headers.put("Content-Type", "application/json");
-                headers.put("JWT",Token);
-                return headers;
+        String name = editTextName.getText().toString().trim();
+        String date = editTextDate.getText().toString().trim();
+        String place = editTextPlace.getText().toString().trim();
+        String information = editTextInformation.getText().toString().trim();
+        if(!name.isEmpty() && !date.isEmpty() && !place.isEmpty() && !information.isEmpty()) {
+            JSONObject Event = new JSONObject();
+            try {
+                Event.put("name", name);
+                Event.put("date", date);
+                Event.put("subject", place);
+                Event.put("information", information);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.PATCH,
+                    URL,
+                    Event,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(SettingEventActivity.this, "Event edited successfuly", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                            Toast.makeText(SettingEventActivity.this, "Event not edited successfuly", Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Authorization", "bearer");
+                    headers.put("Content-Type", "application/json");
+                    headers.put("JWT", Token);
+                    return headers;
+                }
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjectRequest);
+        }else{
+            Toast.makeText(SettingEventActivity.this, "You have to complete all the information", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

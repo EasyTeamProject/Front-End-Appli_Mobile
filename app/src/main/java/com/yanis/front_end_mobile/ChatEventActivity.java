@@ -55,7 +55,7 @@ public class ChatEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText input= (EditText)findViewById(R.id.input);
-                FirebaseDatabase.getInstance().getReference().child("chat").push().setValue(new ChatMessage(input.getText().toString(), "Yanis",event_id));
+                FirebaseDatabase.getInstance().getReference().child("chat").push().setValue(new ChatMessage(input.getText().toString(), PreferenceUtils.getName(ChatEventActivity.this),event_id));
                 input.setText("");
             }
         });
@@ -136,13 +136,13 @@ public class ChatEventActivity extends AppCompatActivity {
                 ArrayList<ChatMessage> list=new ArrayList<>();
                 for(DataSnapshot chatMessage :dataSnapshot.getChildren()){
                     ChatMessage chatMsg = chatMessage.getValue(ChatMessage.class);
-                    System.out.println("event number"+ event_id);
                     if(chatMsg.getEvent_id().equals(event_id)) {
                         list.add(chatMsg);
                     }
 
                 }
                 recyclerView.setAdapter(new RecyclerViewAdapter(list,ChatEventActivity.this));
+                recyclerView.scrollToPosition(list.size()-1);
             }
 
             @Override

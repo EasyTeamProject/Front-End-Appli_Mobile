@@ -66,11 +66,6 @@ public class SurveyEventActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getAllSurveys(recyclerView);
-    }
 
     public void onAddSurveyPressed(View view){
         Intent intent =new Intent(this,AddSurveyActivity.class);
@@ -185,6 +180,7 @@ public class SurveyEventActivity extends AppCompatActivity {
             return new RecyclerViewHolder(view);
         }
 
+        
         @Override
         public void onBindViewHolder(@NonNull SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
             recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());

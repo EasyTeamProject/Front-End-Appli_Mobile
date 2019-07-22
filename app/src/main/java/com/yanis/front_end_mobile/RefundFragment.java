@@ -143,7 +143,7 @@ public class RefundFragment extends Fragment {
 
             recyclerViewHolder.mTextViewPerson1.setText(mlist.get(i).getNamePerson1());
             recyclerViewHolder.mTextViewPerson2.setText(mlist.get(i).getNamePerson2());
-            recyclerViewHolder.mTextViewPrice.setText(mlist.get(i).getPrice());
+            recyclerViewHolder.mTextViewPrice.setText(mlist.get(i).getPrice()+"€");
         }
 
         @Override

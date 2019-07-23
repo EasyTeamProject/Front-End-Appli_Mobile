@@ -1,6 +1,8 @@
 package com.yanis.front_end_mobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +17,11 @@ public class DetailsEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_event);
 
-        mEventId=(TextView)findViewById(R.id.event_detail_id);
         mEventName=(TextView)findViewById(R.id.event_detail_name);
 
         Intent intent=getIntent();
-        String mId = intent.getStringExtra("iId");
         String mName = intent.getStringExtra("iName");
 
-        mEventId.setText(mId);
         mEventName.setText(mName);
     }
 
@@ -32,25 +31,58 @@ public class DetailsEventActivity extends AppCompatActivity {
         Intent i=getIntent();
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         startActivity(intent);
     }
 
 
     public void onInfoPressed(View view){
-        Intent i =new Intent(this, PictureEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this, PictureEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
+        startActivity(intent);
     }
 
 
     public void onSettingPressed(View view){
-        Intent i =new Intent(this,SettingEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,SettingEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
+        startActivity(intent);
     }
 
 
     public void onCashPressed(View view){
-        Intent i =new Intent(this,CashEventActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,CashEventActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("iId");
+        intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
+        startActivity(intent);
     }
 
 
@@ -62,6 +94,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
         intent.putExtra("event_name",event_name);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         this.startActivity(intent);
     }
 
@@ -71,6 +109,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         Intent i=getIntent();
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         startActivity(intent);
     }
 }

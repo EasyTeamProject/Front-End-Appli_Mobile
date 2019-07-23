@@ -9,6 +9,32 @@ public class PreferenceUtils {
 
     }
 
+    public static boolean saveId(long id, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putLong("id",id);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static long getId(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getLong("id", 0);
+    }
+
+    public static boolean saveName(String name, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString("name", name);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getName(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString("name", null);
+    }
+
     public static boolean saveEmail(String email, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();

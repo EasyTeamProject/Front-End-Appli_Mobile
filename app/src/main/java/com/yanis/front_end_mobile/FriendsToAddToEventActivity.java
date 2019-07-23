@@ -2,8 +2,10 @@ package com.yanis.front_end_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -95,7 +97,7 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull FriendsToAddToEventActivity.RecyclerViewHolder recyclerViewHolder, final int i) {
-            recyclerViewHolder.mTextView.setText(mlist.get(i).getName());
+            recyclerViewHolder.mTextView.setText(mlist.get(i).getEmail());
             recyclerViewHolder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -132,7 +134,7 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
                             List<User> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(new User(Integer.parseInt(jsonObject.getString("id")),jsonObject.getString("email")));
+                                list.add(new User(Integer.parseInt(jsonObject.getString("id")),jsonObject.getString("email"),jsonObject.getString("name")));
                             }
                             recyclerView.setAdapter(new FriendsToAddToEventActivity.RecyclerViewAdapter(list,FriendsToAddToEventActivity.this));
                         } catch (JSONException e) {
@@ -169,10 +171,13 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
 
 
     public void inviteFriend(Integer id_user) {
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(this);
+        String event_id= m.getString("event_id", "");
 
-        final String URL = "http://192.168.43.157:3000/events/19/invitations/?user_id="+id_user;
+        final String URL = "http://192.168.43.157:3000/events/"+event_id+"/invitations/?user_id="+id_user;
         final String Token = utils.getToken(this);
         Log.i("Token", "inviteFriend: "+Token);
+        Log.e("event", "getAllFriends: "+URL );
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
@@ -183,6 +188,7 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response){
                         Toast.makeText(FriendsToAddToEventActivity.this, "User added successfuly", Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(FriendsToAddToEventActivity.this,FriendEventActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 },
@@ -226,11 +232,11 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
                         con.setDoInput(true);
 
                         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                        con.setRequestProperty("Authorization", "Basic ZDdkYWQzYjUtOWE2OS00NWNmLWExM2YtMzhiMzI4ZTNiMTY2");
+                        con.setRequestProperty("Authorization", "Basic NTQ2ZDQ5MWYtNWE1Ni00ODM4LWFkZDktOTNkYTM1MmIxOGEy");
                         con.setRequestMethod("POST");
 
                         String strJsonBody = "{"
-                                + "\"app_id\": \"af050209-9fdf-4d4c-a9ed-c0e713ed9bc8\","
+                                + "\"app_id\": \"6b45d19b-d1e7-42f5-ba35-94c510d77719\","
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_id\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
 

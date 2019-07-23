@@ -137,7 +137,7 @@ public class ExpensesFragment extends Fragment {
 
             recyclerViewHolder.mTextViewPerson1.setText(mlist.get(i).getNamePerson1());
             recyclerViewHolder.mTextViewPerson2.setText(mlist.get(i).getNamePerson2());
-            recyclerViewHolder.mTextViewPrice.setText(mlist.get(i).getPrice());
+            recyclerViewHolder.mTextViewPrice.setText(mlist.get(i).getPrice()+"€");
         }
 
         @Override
@@ -162,7 +162,11 @@ public class ExpensesFragment extends Fragment {
 
     private void getAllExpense(final RecyclerView recyclerView) {
 
-        final String URL = "http://192.168.43.157:3000/events/5/transactions";
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(context);
+        String event_id= m.getString("event_id", "");
+        Log.e("event", "getAllFriends: "+event_id );
+
+        final String URL = "http://192.168.43.157:3000/events/"+event_id+"/transactions";
         final String Token = utils.getToken(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(

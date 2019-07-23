@@ -2,6 +2,8 @@ package com.yanis.front_end_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,6 +39,7 @@ public class FriendEventActivity extends AppCompatActivity {
     public TextView textView;
     public PreferenceUtils utils;
     public RecyclerView recyclerView;
+    public long idUserAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +59,16 @@ public class FriendEventActivity extends AppCompatActivity {
 
 
     public void onAddFriendsPressed(View view){
-        Intent intent = new Intent(this,FriendsToAddToEventActivity.class);
-        Intent i=getIntent();
-        String event_name = i.getStringExtra("event_name");
-        intent.putExtra("event_name",event_name);
-        startActivity(intent);
+        if(PreferenceUtils.getId(this)==idUserAdmin) {
+            Intent intent = new Intent(this, FriendsToAddToEventActivity.class);
+            Intent i = getIntent();
+            String event_name = i.getStringExtra("event_name");
+            intent.putExtra("event_name", event_name);
+            startActivity(intent);
+        }else {
+            Toast.makeText(FriendEventActivity.this, "You are not admin!!! you can't invite your friends... please contact the admin", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
 
@@ -85,10 +94,11 @@ public class FriendEventActivity extends AppCompatActivity {
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<FriendEventActivity.RecyclerViewHolder>{
         private Context mCtx;
-        private List<String> mlist;
-        public RecyclerViewAdapter(List<String> list,Context Ctx) {
+        private List<Friend> mlist;
+        public RecyclerViewAdapter(List<Friend> list,Context Ctx) {
             this.mlist=list;
             this.mCtx=Ctx;
+            idUserAdmin =Long.parseLong(list.get(0).getIdUserAdmin());
         }
 
         @NonNull
@@ -101,7 +111,7 @@ public class FriendEventActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull FriendEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
-            recyclerViewHolder.mTextView.setText(mlist.get(i));
+            recyclerViewHolder.mTextView.setText(mlist.get(i).getFamilyNameFriend()+mlist.get(i).getNameFriend());
         }
 
         @Override
@@ -115,10 +125,10 @@ public class FriendEventActivity extends AppCompatActivity {
 
 
     private void getAllFriends(final RecyclerView recyclerView) {
-        Intent intent=getIntent();
-        String event_id = intent.getStringExtra("event_id");
-        Log.i("eventID", "getAllFriends: " +  event_id);
-        final String URL = "https://api.myjson.com/bins/sejfr";
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(this);
+        String event_id= m.getString("event_id", "");
+
+        final String URL = "http://192.168.43.157:3000/events/"+event_id;
         final String Token = utils.getToken(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -129,12 +139,11 @@ public class FriendEventActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            ArrayList<String> list=new ArrayList<>();
+                            ArrayList<Friend> list=new ArrayList<>();
                             JSONArray friendResponse = (JSONArray)response.get("members");
-
                             for (int i=0; i < friendResponse.length(); i++){
                                 JSONObject jsonObject=friendResponse.getJSONObject(i);
-                                list.add(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                                list.add(new Friend(jsonObject.getString("first_name"), jsonObject.getString("last_name"),jsonObject.getString("user_id")));
                             }
                             recyclerView.setAdapter(new FriendEventActivity.RecyclerViewAdapter(list,FriendEventActivity.this));
                         } catch (JSONException e) {

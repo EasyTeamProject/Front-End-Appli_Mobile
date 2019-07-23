@@ -82,6 +82,7 @@ public class AddRefundActivity extends AppCompatActivity implements AdapterView.
     public void onAddPressed(View view) {
         Intent i = new Intent(this, CashEventActivity.class);
         addRefund();
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 
@@ -106,8 +107,10 @@ public class AddRefundActivity extends AppCompatActivity implements AdapterView.
 
 
     private void addRefund() {
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
 
-        final String URL = "http://192.168.43.157:3000/events/5/transactions?from_id=15";
+        final String URL = "http://192.168.43.157:3000/events/"+event_id+"/transactions";
         final String Token = utils.getToken(this);
 
         JSONObject refund = new JSONObject();

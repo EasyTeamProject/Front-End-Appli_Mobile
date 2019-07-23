@@ -23,6 +23,8 @@ public class SuscribeActivity extends AppCompatActivity {
     public EditText editTextEmail;
     public EditText editTextPassword;
     public EditText editTextConfirmPassword;
+    public EditText editTextFirstName;
+    public EditText editTextFamilyName;
     public CheckBox checkBoxOne;
     public CheckBox checkBoxTwo;
 
@@ -34,6 +36,8 @@ public class SuscribeActivity extends AppCompatActivity {
         editTextEmail=(EditText)findViewById(R.id.editTextEmail);
         editTextPassword=(EditText)findViewById(R.id.editTextPassword);
         editTextConfirmPassword=(EditText)findViewById(R.id.editTextConfirmPassword);
+        editTextFamilyName=(EditText)findViewById(R.id.editTextFamilyName);
+        editTextFirstName=(EditText)findViewById(R.id.editTextFirstName);
 
         checkBoxOne=(CheckBox)findViewById(R.id.checkBox);
         checkBoxTwo=(CheckBox)findViewById(R.id.checkBox2);
@@ -58,7 +62,7 @@ public class SuscribeActivity extends AppCompatActivity {
         if(checkBoxTwo.isChecked() && checkBoxOne.isChecked()) {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-            String URL = "http://192.168.43.157:3000/users?email=" + editTextEmail.getText().toString() + "&password=" + editTextPassword.getText().toString();
+            String URL = "http://192.168.43.157:3000/users?email=" + editTextEmail.getText().toString() + "&password=" + editTextPassword.getText().toString()+ "&first_name=" + editTextFirstName.getText().toString() + "&last_name=" + editTextFamilyName.getText().toString();
             if (editTextPassword.getText().toString().equals(editTextConfirmPassword.getText().toString())) {
                 JsonObjectRequest objectRequest = new JsonObjectRequest(
                         Request.Method.POST,

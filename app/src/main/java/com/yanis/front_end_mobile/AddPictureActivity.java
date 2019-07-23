@@ -63,9 +63,14 @@ public class AddPictureActivity extends AppCompatActivity {
     }
 
     public void onSaveClick(View view){
-        uploadNewProfilePicture(imageUri);
-        Intent intent = new Intent(this,PictureEventActivity.class);
-        startActivity(intent);
+        if(imageUri != null && !imageUri.equals(Uri.EMPTY)) {
+            uploadNewProfilePicture(imageUri);
+            Intent intent = new Intent(this, PictureEventActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }else {
+            Toast.makeText(AddPictureActivity.this, "You have to choose a picture from your gallery", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openGallery(){
@@ -89,7 +94,8 @@ public class AddPictureActivity extends AppCompatActivity {
 
 
     private void uploadNewProfilePicture(Uri profilePicture) {
-
+        Intent intent=getIntent();
+        final String event_id = intent.getStringExtra("event_id");
 
         File file = new File(FileUtils.getPath(this, profilePicture));
 
@@ -108,7 +114,7 @@ public class AddPictureActivity extends AppCompatActivity {
         UserService service = retrofit.create(UserService.class);
 
 
-        Call<ResponseBody> call = service.setProfilePicture(utils.getToken(this), "1", body);
+        Call<ResponseBody> call = service.setProfilePicture(utils.getToken(this), event_id, body);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {

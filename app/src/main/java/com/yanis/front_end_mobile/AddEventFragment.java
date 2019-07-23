@@ -35,6 +35,8 @@ public class AddEventFragment extends Fragment {
 
     public EditText editTextName;
     public EditText editTextDate;
+    public EditText editTextPlace;
+    public EditText editTextInformation;
     public Activity context;
     public PreferenceUtils utils;
 
@@ -54,6 +56,8 @@ public class AddEventFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_add_event, container, false);
         editTextName= (EditText) v.findViewById(R.id.editTextNameAddEvent);
         editTextDate= (EditText) v.findViewById(R.id.editTextDateAddEvent);
+        editTextPlace= (EditText) v.findViewById(R.id.editTextPlace);
+        editTextInformation= (EditText) v.findViewById(R.id.editTextInformation);
         return v;
     }
     public void onStart(){
@@ -62,8 +66,6 @@ public class AddEventFragment extends Fragment {
         btnAddEvent.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 postDataWithAccessToken();
-                Intent i =new Intent(context,HomeActivity.class);
-                startActivity(i);
             }
         });
     }
@@ -71,39 +73,44 @@ public class AddEventFragment extends Fragment {
 
     private void postDataWithAccessToken() {
 
-        final String URL = "http://192.168.43.157:3000/events?name="+editTextName.getText().toString().trim()+"&date="+editTextDate.getText().toString().trim();
+        final String URL = "http://192.168.43.157:3000/events?name="+editTextName.getText().toString().trim()+"&date="+editTextDate.getText().toString().trim()+"&subject="+editTextPlace.getText().toString().trim()+"&information="+editTextInformation.getText().toString().trim();
         final String Token = utils.getToken(context);
 
+        if(!editTextName.getText().toString().trim().isEmpty() && !editTextDate.getText().toString().trim().isEmpty() && !editTextPlace.getText().toString().trim().isEmpty() && !editTextInformation.getText().toString().trim().isEmpty()) {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                    Request.Method.POST,
+                    URL,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(context, "Event add successfuly", Toast.LENGTH_SHORT).show();
+                            Intent i =new Intent(context,HomeActivity.class);
+                            startActivity(i);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                            Toast.makeText(context, "Error to add event", Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Authorization", "bearer");
+                    headers.put("Content-Type", "application/json");
+                    headers.put("JWT", Token);
+                    return headers;
+                }
+            };
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                URL,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(context, "Event add successfuly", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(context, "Error to add event", Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "bearer");
-                headers.put("Content-Type", "application/json");
-                headers.put("JWT",Token);
-                return headers;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(jsonObjectRequest);
+            RequestQueue requestQueue = Volley.newRequestQueue(context);
+            requestQueue.add(jsonObjectRequest);
+        }else{
+            Toast.makeText(context, "You have to complete all the information to create an event", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

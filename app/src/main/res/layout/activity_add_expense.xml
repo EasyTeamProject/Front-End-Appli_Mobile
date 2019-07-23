@@ -59,7 +59,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="how much?"
+                android:hint="how much?(€)"
                 android:inputType="number"
                 android:singleLine="false" />
         </android.support.v7.widget.CardView>

@@ -26,7 +26,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="Suscribe"
+        android:text="Subscribe"
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardViewFamilyName">
 
         <EditText
-            android:id="@+id/editTextQuestionSurvey"
+            android:id="@+id/editTextFirstName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -186,8 +186,10 @@
         android:layout_marginStart="68dp"
         android:layout_marginTop="52dp"
         android:textColor="#FFFFFF"
+        android:textColorHint="@color/ColorTurquoise"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CardViewConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/CardViewConfirmPassword"
+        android:buttonTint="@color/ColorTurquoise"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -211,8 +213,10 @@
         android:layout_marginStart="68dp"
         android:layout_marginTop="4dp"
         android:textColor="#FFFFFF"
+        android:textColorHint="@color/ColorTurquoise"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        android:buttonTint="@color/ColorTurquoise"/>
 
     <TextView
         android:id="@+id/textView9"

@@ -68,13 +68,19 @@ public class CashEventActivity extends AppCompatActivity {
 
 
     public void onAddRefundPressed(View view){
-        Intent i =new Intent(this,AddRefundActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,AddRefundActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 
     public void onAddExpensePressed(View view){
-        Intent i =new Intent(this,AddExpenseActivity.class);
-        startActivity(i);
+        Intent intent =new Intent(this,AddExpenseActivity.class);
+        Intent i=getIntent();
+        String event_id = i.getStringExtra("event_id");
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 
 
@@ -82,10 +88,13 @@ public class CashEventActivity extends AppCompatActivity {
 
 
     public void getAllFriends() {
-        Intent intent = getIntent();
-        String event_id = intent.getStringExtra("event_id");
-        Log.i("eventID", "getAllFriends: " + "5");
-        final String URL = "https://api.myjson.com/bins/g01fv";
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(this);
+        String event_id= m.getString("event_id", "");
+        Log.e("event", "getAllFriends: "+event_id );
+
+
+        final String URL = "http://192.168.43.157:3000/events/"+event_id;
         final String Token = utils.getToken(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(

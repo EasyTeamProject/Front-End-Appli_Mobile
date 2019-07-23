@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.onesignal.OneSignal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +61,14 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         PreferenceUtils utils = new PreferenceUtils();
         context=getActivity();
+
+        OneSignal.startInit(context)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        OneSignal.sendTag("User_id",PreferenceUtils.getEmail(context));
+
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView recyclerView=v.findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

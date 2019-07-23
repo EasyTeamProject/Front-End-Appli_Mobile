@@ -29,7 +29,7 @@
             android:layout_gravity="center_horizontal|center"
             android:background="@drawable/selected_tab_background"
             android:onClick="onAddRefundPressed"
-            android:text="Add refund"
+            android:text="Add"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

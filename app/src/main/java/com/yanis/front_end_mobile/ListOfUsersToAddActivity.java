@@ -129,7 +129,7 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
                             List<User> list=new ArrayList<>();
                             for (int i=0; i < response.length(); i++){
                                 JSONObject jsonObject=response.getJSONObject(i);
-                                list.add(new User(Integer.parseInt(jsonObject.getString("id")),jsonObject.getString("email")));
+                                list.add(new User(Integer.parseInt(jsonObject.getString("id")),jsonObject.getString("name")));
                             }
                             recyclerView.setAdapter(new ListOfUsersToAddActivity.RecyclerViewAdapter(list,ListOfUsersToAddActivity.this));
                         } catch (JSONException e) {
@@ -180,6 +180,7 @@ public class ListOfUsersToAddActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response){
                         Toast.makeText(ListOfUsersToAddActivity.this, "User added successfuly", Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(ListOfUsersToAddActivity.this,FriendsActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 },

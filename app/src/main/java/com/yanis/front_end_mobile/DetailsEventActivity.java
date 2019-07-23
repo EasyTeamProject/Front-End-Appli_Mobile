@@ -31,6 +31,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         Intent i=getIntent();
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         startActivity(intent);
     }
 
@@ -40,6 +46,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         Intent i=getIntent();
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         startActivity(intent);
     }
 
@@ -49,6 +61,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         Intent i=getIntent();
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         startActivity(intent);
     }
 
@@ -76,6 +94,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
         intent.putExtra("event_name",event_name);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         this.startActivity(intent);
     }
 
@@ -85,6 +109,12 @@ public class DetailsEventActivity extends AppCompatActivity {
         Intent i=getIntent();
         String event_id = i.getStringExtra("iId");
         intent.putExtra("event_id",event_id);
+
+        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(DetailsEventActivity.this);
+        SharedPreferences.Editor editor = m.edit();
+        editor.putString("event_id", event_id);
+        editor.commit();
+
         startActivity(intent);
     }
 }

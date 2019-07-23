@@ -30,13 +30,6 @@ public class HomeActivity extends AppCompatActivity {
         mMainFrame=(FrameLayout)findViewById(R.id.main_frame);
         mMainNav=(BottomNavigationView)findViewById(R.id.main_nav);
 
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-
-        OneSignal.sendTag("User_id",PreferenceUtils.getEmail(this));
-
         homeFragment= new HomeFragment();
         addEventFragment = new AddEventFragment();
         notificationFragment = new NotificationFragment();

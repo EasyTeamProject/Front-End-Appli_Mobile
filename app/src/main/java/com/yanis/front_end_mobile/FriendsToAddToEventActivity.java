@@ -232,11 +232,11 @@ public class FriendsToAddToEventActivity extends AppCompatActivity {
                         con.setDoInput(true);
 
                         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                        con.setRequestProperty("Authorization", "Basic ZDdkYWQzYjUtOWE2OS00NWNmLWExM2YtMzhiMzI4ZTNiMTY2");
+                        con.setRequestProperty("Authorization", "Basic NTQ2ZDQ5MWYtNWE1Ni00ODM4LWFkZDktOTNkYTM1MmIxOGEy");
                         con.setRequestMethod("POST");
 
                         String strJsonBody = "{"
-                                + "\"app_id\": \"af050209-9fdf-4d4c-a9ed-c0e713ed9bc8\","
+                                + "\"app_id\": \"6b45d19b-d1e7-42f5-ba35-94c510d77719\","
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_id\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
 

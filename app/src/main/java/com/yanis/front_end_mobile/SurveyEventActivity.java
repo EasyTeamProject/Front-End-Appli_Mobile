@@ -92,6 +92,8 @@ public class SurveyEventActivity extends AppCompatActivity {
         private TextView mTextViewNumberOne;
         private TextView mTextViewAnswerTwo;
         private TextView mTextViewNumberTwo;
+        private Button buttonOne;
+        private Button buttonTwo;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -102,6 +104,8 @@ public class SurveyEventActivity extends AppCompatActivity {
             mTextViewNumberOne = itemView.findViewById(R.id.TextViewNumberOne);
             mTextViewAnswerTwo = itemView.findViewById(R.id.TextViewAnswerTwo);
             mTextViewNumberTwo = itemView.findViewById(R.id.TextViewNumberTwo);
+            buttonOne = itemView.findViewById(R.id.buttonOne);
+            buttonTwo = itemView.findViewById(R.id.buttonTwo);
         }
     }
 
@@ -133,17 +137,29 @@ public class SurveyEventActivity extends AppCompatActivity {
             final Button buttonOne = view.findViewById(R.id.buttonOne);
             final Button buttonTwo = view.findViewById(R.id.buttonTwo);
 
-            buttonOne.setOnClickListener(new View.OnClickListener() {
+            return new RecyclerViewHolder(view);
+        }
+
+
+        @Override
+        public void onBindViewHolder(@NonNull final SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, final int i) {
+            recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());
+            recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne());
+            recyclerViewHolder.mTextViewNumberOne.setText(Long.toString(mlist.get(i).getNumberAnswerOne()));
+            recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo());
+            recyclerViewHolder.mTextViewNumberTwo.setText(Long.toString(mlist.get(i).getNumberAnswerTwo()));
+
+            recyclerViewHolder.buttonOne.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        if (buttonOne.getText().toString().equals("+")) {
-                            buttonOne.setText("-");
+                        if (recyclerViewHolder.buttonOne.getText().toString().equals("+")) {
+                            recyclerViewHolder.buttonOne.setText("-");
                             FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerOne").setValue(mlist.get(i).getNumberAnswerOne()+1);
                             return;
                         }
-                        if (buttonOne.getText().toString().equals("-")) {
-                            buttonOne.setText("+");
+                        if (recyclerViewHolder.buttonOne.getText().toString().equals("-")) {
+                            recyclerViewHolder.buttonOne.setText("+");
                             FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerOne").setValue(mlist.get(i).getNumberAnswerOne()-1);
                             return;
                         }
@@ -155,17 +171,17 @@ public class SurveyEventActivity extends AppCompatActivity {
                 }
             } );
 
-            buttonTwo.setOnClickListener(new View.OnClickListener() {
+            recyclerViewHolder.buttonTwo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        if (buttonTwo.getText().toString().equals("+")) {
-                            buttonTwo.setText("-");
+                        if (recyclerViewHolder.buttonTwo.getText().toString().equals("+")) {
+                            recyclerViewHolder.buttonTwo.setText("-");
                             FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerTwo").setValue(mlist.get(i).getNumberAnswerTwo()+1);
                             return;
                         }
-                        if (buttonTwo.getText().toString().equals("-")) {
-                            buttonTwo.setText("+");
+                        if (recyclerViewHolder.buttonTwo.getText().toString().equals("-")) {
+                            recyclerViewHolder.buttonTwo.setText("+");
                             FirebaseDatabase.getInstance().getReference().child("survey").child(mlist.get(i).getId()).child("numberAnswerTwo").setValue(mlist.get(i).getNumberAnswerTwo()-1);
                             return;
                         }
@@ -176,18 +192,6 @@ public class SurveyEventActivity extends AppCompatActivity {
                     }
                 }
             } );
-
-            return new RecyclerViewHolder(view);
-        }
-
-
-        @Override
-        public void onBindViewHolder(@NonNull SurveyEventActivity.RecyclerViewHolder recyclerViewHolder, int i) {
-            recyclerViewHolder.mTextViewPrincipalQuestion.setText(mlist.get(i).getQuestion());
-            recyclerViewHolder.mTextViewAnswerOne.setText(mlist.get(i).getAnswerOne());
-            recyclerViewHolder.mTextViewNumberOne.setText(Long.toString(mlist.get(i).getNumberAnswerOne()));
-            recyclerViewHolder.mTextViewAnswerTwo.setText(mlist.get(i).getAnswerTwo());
-            recyclerViewHolder.mTextViewNumberTwo.setText(Long.toString(mlist.get(i).getNumberAnswerTwo()));
 
         }
 
